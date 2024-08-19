@@ -1,1 +1,17 @@
-link rel="icon" href="https://e7.pngegg.com/pngimages/912/682/png-clipart-apple-logo-brand-apple-company-trademark.png" type="image/png">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="icon" href="https://e7.pngegg.com/pngimages/912/682/png-clipart-apple-logo-brand-apple-company-trademark.png" type="image/x-icon">
+    <!-- Optional: Additional sizes for high-resolution displays -->
+    <link rel="icon" href="https://e7.pngegg.com/pngimages/912/682/png-clipart-apple-logo-brand-apple-company-trademark.png" sizes="32x32" type="image/png">
+    <style>
+        /* Your CSS styles here */
+    </style>
+</head>
+<body>
+    hey
+</body>
+</html>
