@@ -1,5 +1,3 @@
-# indwi.github.io
-<h1> this is my site! </h1>
+# indwi.github.io <h1> - indis site </h1>
 <p> welcome to indis site. </p>
-<a href="https://www.google.com/">click here to google!</a> 
-<h1> <a href="https://codepen.io/las-/pen/GRbmPrd">click here for cucumber.</a> </h1>
+<img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/7/7a/Stick_JE1_BE1.png/revision/latest/thumbnail/width/360/height/360?cb=20200128023441">
