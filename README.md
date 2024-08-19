@@ -1,4 +1,4 @@
 # indwi.github.io
 <h1> this is my site! </h1>
 <p> welcome to indis site. </p>
-<p1> click here to view contacts! </p1>
+<a href"https://www.google.com/">click here to google!</a> 
