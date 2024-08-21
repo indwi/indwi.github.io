@@ -3,51 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>indis website</title>
+    <title>indis art</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #f06, #ffeb3b);
+            color: #fff;
         }
         header {
-            background-color: #f4f4f4;
+            background-color: #ff5722;
             padding: 20px;
             text-align: center;
-            border-bottom: 2px solid #ddd;
-        }
-        nav {
-            margin: 0;
-            padding: 10px;
-            background-color: #333;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-        nav ul li a {
+            font-size: 2.5em;
             color: #fff;
-            text-decoration: none;
-            padding: 10px 15px;
-            display: inline-block;
-        }
-        nav ul li a:hover {
-            background-color: #575757;
+            border-bottom: 5px solid #ff9800;
         }
         .container {
             padding: 20px;
         }
+        .box {
+            background: #00bcd4;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .box h2 {
+            margin-top: 0;
+        }
+        .box:nth-child(even) {
+            background: #8bc34a;
+        }
+        .box:nth-child(odd) {
+            background: #ffeb3b;
+        }
         footer {
-            background-color: #f4f4f4;
-            padding: 10px;
+            background-color: #3f51b5;
+            color: #fff;
             text-align: center;
-            border-top: 2px solid #ddd;
+            padding: 10px;
             position: fixed;
             width: 100%;
             bottom: 0;
@@ -56,29 +52,24 @@
 </head>
 <body>
     <header>
-        <h1>welcome to my website</h1>
-        <p>explore!!</p>
+        indis art
     </header>
-    <nav>
-        <ul>
-            <li><a href="home.html">home</a></li>
-            <li><a href="about.html">about</a></li>
-            <li><a href="services.html">services</a></li>
-            <li><a href="contact.html">contact</a></li>
-        </ul>
-    </nav>
     <div class="container">
-        <h2>about me/h2>
-        <p>im a student at victory college</p>
-        
-        <h2>services</h2>
-        <p>i offer...</p>
-        
-        <h2>contact me</h2>
-        <p>contact me.</p>
+        <div class="box">
+            <h2>welcome to indis art site</h2>
+            <p>take a look at our current pieces available. from colourful to classy, modern to renaissance, what can't you buy?</p>
+        </div>
+        <div class="box">
+            <h2>about us</h2>
+            <p>take a look at our story</p>
+        </div>
+        <div class="box">
+            <h2>contact us</h2>
+            <p>got questions? feel free to flick us a message!</p>
+        </div>
     </div>
     <footer>
-        <p>&copy; 2024 indis website. all rights reserved.</p>
+        &copy; 2024 indis art. all rights reserved.
     </footer>
 </body>
 </html>
