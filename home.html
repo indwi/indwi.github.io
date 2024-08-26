@@ -3,36 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chic & Colorful Website</title>
+    <title>Modern Floral Background</title>
     <style>
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 0%; }
-            50% { background-position: 100% 100%; }
-            100% { background-position: 0% 0%; }
-        }
-
         body {
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            color: #333;
-            background: linear-gradient(45deg, #ff7e5f, #feb47b, #6a11cb, #2575fc);
-            background-size: 400% 400%;
-            animation: gradientAnimation 30s ease infinite;
+            overflow: hidden;
+            background: #f0f8ff; /* Light background color */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
+            position: relative;
         }
 
+        .flower {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2L9 7H4v5h5l-3 5 7-5 7 5-3-5h5V7h-5z" fill="%23ff4081"/%3E%3C/svg%3E') no-repeat center;
+            background-size: contain;
+            animation: moveFlower 20s infinite linear;
+        }
+
+        .flower:nth-child(1) { top: 10%; left: 20%; animation-duration: 15s; }
+        .flower:nth-child(2) { top: 20%; left: 50%; animation-duration: 18s; }
+        .flower:nth-child(3) { top: 30%; left: 70%; animation-duration: 12s; }
+        .flower:nth-child(4) { top: 50%; left: 30%; animation-duration: 22s; }
+        .flower:nth-child(5) { top: 60%; left: 80%; animation-duration: 16s; }
+
+        @keyframes moveFlower {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(20px, 20px); }
+            100% { transform: translate(0, 0); }
+        }
+        
         .container {
             text-align: center;
             padding: 20px;
             border-radius: 15px;
-            background: white;
+            background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 80%;
             max-width: 900px;
+            position: relative;
+            z-index: 1;
         }
 
         h1 {
@@ -43,5 +57,54 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
-  
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 20px 0;
+            font-size: 1em;
+            color: #fff;
+            background: #ff6f61;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #d84a61;
+        }
+
+        footer {
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+    <div class="flower"></div>
+
+    <div class="container">
+        <h1>Welcome to Chic & Floral</h1>
+        <p>Explore a modern floral design with animated flowers. Perfect for a vibrant and stylish backdrop.</p>
+        <a href="#" class="btn">Discover More</a>
+        <footer>
+            &copy; 2024 Chic & Floral | All Rights Reserved
+        </footer>
+    </div>
+</body>
+</html>
+
 
