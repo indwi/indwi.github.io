@@ -3,75 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Truck Adventure</title>
+    <title>Square Dodging Game</title>
     <style>
         body {
             margin: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to bottom, #f8c291, #e77f7f); /* Gradient background */
-            text-align: center;
-            color: #fff;
-        }
-
-        .container {
-            position: relative;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        .food-truck {
-            position: absolute;
-            bottom: 10px;
-            width: 150px;
-            height: 100px;
-            background: url('https://www.w3schools.com/w3images/foodtruck.jpg') no-repeat center center;
-            background-size: cover;
-        }
-
-        h1 {
-            margin-top: 20px;
-            font-size: 3em;
-            color: #fff;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
-        }
-
-        p {
-            font-size: 1.5em;
-            color: #fff;
-            margin: 0;
             padding: 0;
+            overflow: hidden;
+            background: #333;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+
+        canvas {
+            display: block;
+            background: #222;
+            margin: 0 auto;
+        }
+
+        #score {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to the Food Truck Adventure!</h1>
-        <p>Catch our food truck as it moves across the screen!</p>
-        <div id="food-truck" class="food-truck"></div>
-    </div>
+    <div id="score">Score: 0</div>
+    <canvas id="gameCanvas"></canvas>
 
     <script>
-        function moveTruck() {
-            const truck = document.getElementById('food-truck');
-            let position = -truck.offsetWidth; // Start off-screen on the left
-            const screenWidth = window.innerWidth;
-            const truckWidth = truck.offsetWidth;
-            const speed = 3; // Speed of movement in pixels
+        // Game setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-            function animate() {
-                position += speed;
-                if (position > screenWidth) {
-                    position = -truckWidth; // Reset to start
-                }
-                truck.style.left = position + 'px';
-                requestAnimationFrame(animate);
-            }
+        const playerSize = 50;
+        const blockSize = 50;
+        const blockSpeed = 5;
+        let playerX = canvas.width / 2 - playerSize / 2;
+        let playerY = canvas.height - playerSize - 10;
+        let blocks = [];
+        let score = 0;
 
-            animate();
+        function drawPlayer() {
+            ctx.fillStyle = 'lime';
+            ctx.fillRect(playerX, playerY, playerSize, playerSize);
         }
 
-        moveTruck();
+        function drawBlocks() {
+            ctx.fillStyle = 'red';
+            blocks.forEach(block => {
+                ctx.fillRect(block.x, block.y, blockSize, blockSize);
+            });
+        }
+
+        function updateBlocks() {
+            blocks.forEach(block => {
+                block.y += blockSpeed;
+            });
+            blocks = blocks.filter(block => block.y < canvas.height);
+        }
+
+        function detectCollision() {
+            return blocks.some(block => {
+                return (
+                    playerX < block.x + blockSize &&
+                    playerX + playerSize > block.x &&
+                    playerY < block.y + blockSize &&
+                    playerY + playerSize > block.y
+                );
+            });
+        }
+
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawBlocks();
+            updateBlocks();
+            if (detectCollision()) {
+                alert('Game Over! Your Score: ' + score);
+                document.location.reload();
+            }
+            requestAnimationFrame(gameLoop);
+        }
+
+        function spawnBlock() {
+            const x = Math.random() * (canvas.width - blockSize);
+            blocks.push({ x: x, y: -blockSize });
+            score++;
+            document.getElementById('score').textContent = 'Score: ' + score;
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                playerX = Math.max(playerX - 20, 0);
+            } else if (event.key === 'ArrowRight') {
+                playerX = Math.min(playerX + 20, canvas.width - playerSize);
+            }
+        });
+
+        setInterval(spawnBlock, 1000); // Spawn a new block every second
+        gameLoop();
     </script>
 </body>
 </html>
