@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+                <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,15 +39,31 @@
             display: none;
             z-index: 1;
         }
+
+        #restart-btn {
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            padding: 10px 20px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
     <div id="score">Score: 0</div>
     <div id="game-over">Game Over!</div>
+    <button id="restart-btn">Restart</button>
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        // Game Setup
+        // Game setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -64,13 +81,33 @@
         const laserSpeed = 7;
         const moveSpeed = 5;
         const maxLasers = 3;
+        const alienDropSpeed = 1;
+        const powerUpSize = 20;
+        const powerUpChance = 0.05; // 5% chance of power-up appearing
 
-        let spaceshipX = canvas.width / 2 - spaceshipWidth / 2;
-        let spaceshipY = canvas.height - spaceshipHeight - 10;
+        let spaceshipX, spaceshipY;
         let aliens = [];
         let lasers = [];
+        let powerUps = [];
         let score = 0;
         let gameOver = false;
+        let alienDirection = 1; // 1 for right, -1 for left
+
+        // Initialize game state
+        function init() {
+            spaceshipX = canvas.width / 2 - spaceshipWidth / 2;
+            spaceshipY = canvas.height - spaceshipHeight - 10;
+            aliens = [];
+            lasers = [];
+            powerUps = [];
+            score = 0;
+            gameOver = false;
+            alienDirection = 1;
+            document.getElementById('game-over').style.display = 'none';
+            document.getElementById('restart-btn').style.display = 'none';
+            spawnAliens();
+            gameLoop();
+        }
 
         // Draw functions
         function drawSpaceship() {
@@ -92,19 +129,27 @@
             });
         }
 
+        function drawPowerUps() {
+            ctx.fillStyle = 'yellow';
+            powerUps.forEach(powerUp => {
+                ctx.fillRect(powerUp.x, powerUp.y, powerUpSize, powerUpSize);
+            });
+        }
+
         function updateAliens() {
             let moveDown = false;
             aliens.forEach(alien => {
-                alien.x += alienSpeed;
+                alien.x += alienSpeed * alienDirection;
                 if (alien.x > canvas.width - alienWidth || alien.x < 0) {
                     moveDown = true;
                 }
             });
             if (moveDown) {
                 aliens.forEach(alien => {
-                    alien.x += alienSpeed * (alien.x > canvas.width - alienWidth ? -1 : 1);
+                    alien.x += alienSpeed * -alienDirection;
                     alien.y += alienHeight;
                 });
+                alienDirection *= -1;
             }
         }
 
@@ -113,6 +158,13 @@
                 x: laser.x,
                 y: laser.y - laserSpeed
             })).filter(laser => laser.y > 0);
+        }
+
+        function updatePowerUps() {
+            powerUps = powerUps.map(powerUp => ({
+                x: powerUp.x,
+                y: powerUp.y + alienDropSpeed
+            })).filter(powerUp => powerUp.y < canvas.height);
         }
 
         function detectCollisions() {
@@ -127,12 +179,32 @@
                         score += 10;
                         aliens.splice(alienIndex, 1);
                         lasers.splice(laserIndex, 1);
+                        if (Math.random() < powerUpChance) {
+                            powerUps.push({
+                                x: alien.x + alienWidth / 2 - powerUpSize / 2,
+                                y: alien.y
+                            });
+                        }
                     }
                 });
             });
+
+            powerUps.forEach((powerUp, powerUpIndex) => {
+                if (
+                    powerUp.x < spaceshipX + spaceshipWidth &&
+                    powerUp.x + powerUpSize > spaceshipX &&
+                    powerUp.y < spaceshipY + spaceshipHeight &&
+                    powerUp.y + powerUpSize > spaceshipY
+                ) {
+                    score += 50; // Bonus score for collecting a power-up
+                    powerUps.splice(powerUpIndex, 1);
+                }
+            });
+
             if (aliens.some(alien => alien.y + alienHeight > canvas.height)) {
                 gameOver = true;
                 document.getElementById('game-over').style.display = 'block';
+                document.getElementById('restart-btn').style.display = 'block';
             }
         }
 
@@ -144,9 +216,11 @@
             drawSpaceship();
             drawAliens();
             drawLasers();
+            drawPowerUps();
 
             updateAliens();
             updateLasers();
+            updatePowerUps();
             detectCollisions();
 
             document.getElementById('score').textContent = 'Score: ' + score;
@@ -180,9 +254,13 @@
             }
         });
 
-        spawnAliens();
-        gameLoop();
+        document.getElementById('restart-btn').addEventListener('click', () => {
+            init();
+        });
+
+        init();
     </script>
 </body>
 </html>
+
 
