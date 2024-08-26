@@ -3,29 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space Invaders Game</title>
+    <title>Basic Shooter Game</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background: black;
-            color: white;
+            background: #87CEFA; /* Sky blue */
             font-family: Arial, sans-serif;
         }
 
         canvas {
             display: block;
             margin: 0 auto;
-            background: #000;
-        }
-
-        #score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 24px;
-            z-index: 1;
+            background: #228B22; /* Forest green */
         }
 
         #game-over {
@@ -38,173 +29,116 @@
             display: none;
             z-index: 1;
         }
-
-        #restart-btn {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 24px;
-            padding: 10px 20px;
-            background-color: #333;
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: none;
-            z-index: 1;
-        }
     </style>
 </head>
 <body>
-    <div id="score">Score: 0</div>
     <div id="game-over">Game Over!</div>
-    <button id="restart-btn">Restart</button>
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        // Game setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const spaceshipWidth = 50;
-        const spaceshipHeight = 30;
-        const laserWidth = 5;
-        const laserHeight = 20;
-        const alienWidth = 40;
-        const alienHeight = 30;
-        const alienRows = 4;
-        const alienCols = 8;
-        const alienSpeed = 2;
-        const laserSpeed = 7;
-        const moveSpeed = 5;
-        const maxLasers = 3;
-        const alienDropSpeed = 1;
-        const powerUpSize = 20;
-        const powerUpChance = 0.05; // 5% chance of power-up appearing
+        const playerSize = 30;
+        const bulletSize = 5;
+        const bulletSpeed = 7;
+        const playerSpeed = 5;
+        const enemySize = 30;
+        const enemySpeed = 2;
+        const enemiesCount = 5;
 
-        let spaceshipX, spaceshipY;
-        let aliens = [];
-        let lasers = [];
-        let powerUps = [];
-        let score = 0;
+        let player = {
+            x: canvas.width / 2 - playerSize / 2,
+            y: canvas.height - playerSize - 10,
+            width: playerSize,
+            height: playerSize,
+            color: 'blue',
+            dx: 0,
+            dy: 0
+        };
+
+        let bullets = [];
+        let enemies = [];
         let gameOver = false;
-        let alienDirection = 1; // 1 for right, -1 for left
 
-        // Initialize game state
-        function init() {
-            spaceshipX = canvas.width / 2 - spaceshipWidth / 2;
-            spaceshipY = canvas.height - spaceshipHeight - 10;
-            aliens = [];
-            lasers = [];
-            powerUps = [];
-            score = 0;
-            gameOver = false;
-            alienDirection = 1;
-            document.getElementById('game-over').style.display = 'none';
-            document.getElementById('restart-btn').style.display = 'none';
-            spawnAliens();
-            gameLoop();
+        function drawPlayer() {
+            ctx.fillStyle = player.color;
+            ctx.fillRect(player.x, player.y, player.width, player.height);
         }
 
-        // Draw functions
-        function drawSpaceship() {
-            ctx.fillStyle = 'white';
-            ctx.fillRect(spaceshipX, spaceshipY, spaceshipWidth, spaceshipHeight);
-        }
-
-        function drawAliens() {
-            ctx.fillStyle = 'green';
-            aliens.forEach(alien => {
-                ctx.fillRect(alien.x, alien.y, alienWidth, alienHeight);
-            });
-        }
-
-        function drawLasers() {
+        function drawBullets() {
             ctx.fillStyle = 'red';
-            lasers.forEach(laser => {
-                ctx.fillRect(laser.x, laser.y, laserWidth, laserHeight);
+            bullets.forEach(bullet => {
+                ctx.fillRect(bullet.x, bullet.y, bulletSize, bulletSize);
             });
         }
 
-        function drawPowerUps() {
-            ctx.fillStyle = 'yellow';
-            powerUps.forEach(powerUp => {
-                ctx.fillRect(powerUp.x, powerUp.y, powerUpSize, powerUpSize);
+        function drawEnemies() {
+            ctx.fillStyle = 'green';
+            enemies.forEach(enemy => {
+                ctx.fillRect(enemy.x, enemy.y, enemySize, enemySize);
             });
         }
 
-        function updateAliens() {
-            let moveDown = false;
-            aliens.forEach(alien => {
-                alien.x += alienSpeed * alienDirection;
-                if (alien.x > canvas.width - alienWidth || alien.x < 0) {
-                    moveDown = true;
-                }
-            });
-            if (moveDown) {
-                aliens.forEach(alien => {
-                    alien.x += alienSpeed * -alienDirection;
-                    alien.y += alienHeight;
-                });
-                alienDirection *= -1;
+        function updatePlayer() {
+            player.x += player.dx;
+            player.y += player.dy;
+
+            // Keep player within bounds
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
+            if (player.y < 0) player.y = 0;
+            if (player.y + player.height > canvas.height) player.y = canvas.height - player.height;
+        }
+
+        function updateBullets() {
+            bullets = bullets.map(bullet => ({
+                x: bullet.x,
+                y: bullet.y - bulletSpeed
+            })).filter(bullet => bullet.y > 0);
+        }
+
+        function updateEnemies() {
+            enemies = enemies.map(enemy => ({
+                x: enemy.x,
+                y: enemy.y + enemySpeed
+            })).filter(enemy => enemy.y < canvas.height);
+
+            // Check for game over
+            if (enemies.some(enemy => enemy.y + enemySize > canvas.height)) {
+                gameOver = true;
+                document.getElementById('game-over').style.display = 'block';
             }
         }
 
-        function updateLasers() {
-            lasers = lasers.map(laser => ({
-                x: laser.x,
-                y: laser.y - laserSpeed
-            })).filter(laser => laser.y > 0);
-        }
-
-        function updatePowerUps() {
-            powerUps = powerUps.map(powerUp => ({
-                x: powerUp.x,
-                y: powerUp.y + alienDropSpeed
-            })).filter(powerUp => powerUp.y < canvas.height);
-        }
-
         function detectCollisions() {
-            lasers.forEach((laser, laserIndex) => {
-                aliens.forEach((alien, alienIndex) => {
+            bullets.forEach((bullet, bulletIndex) => {
+                enemies.forEach((enemy, enemyIndex) => {
                     if (
-                        laser.x < alien.x + alienWidth &&
-                        laser.x + laserWidth > alien.x &&
-                        laser.y < alien.y + alienHeight &&
-                        laser.y + laserHeight > alien.y
+                        bullet.x < enemy.x + enemySize &&
+                        bullet.x + bulletSize > enemy.x &&
+                        bullet.y < enemy.y + enemySize &&
+                        bullet.y + bulletSize > enemy.y
                     ) {
-                        score += 10;
-                        aliens.splice(alienIndex, 1);
-                        lasers.splice(laserIndex, 1);
-                        if (Math.random() < powerUpChance) {
-                            powerUps.push({
-                                x: alien.x + alienWidth / 2 - powerUpSize / 2,
-                                y: alien.y
-                            });
-                        }
+                        bullets.splice(bulletIndex, 1);
+                        enemies.splice(enemyIndex, 1);
                     }
                 });
             });
 
-            powerUps.forEach((powerUp, powerUpIndex) => {
+            enemies.forEach((enemy, enemyIndex) => {
                 if (
-                    powerUp.x < spaceshipX + spaceshipWidth &&
-                    powerUp.x + powerUpSize > spaceshipX &&
-                    powerUp.y < spaceshipY + spaceshipHeight &&
-                    powerUp.y + powerUpSize > spaceshipY
+                    player.x < enemy.x + enemySize &&
+                    player.x + player.width > enemy.x &&
+                    player.y < enemy.y + enemySize &&
+                    player.y + player.height > enemy.y
                 ) {
-                    score += 50; // Bonus score for collecting a power-up
-                    powerUps.splice(powerUpIndex, 1);
+                    gameOver = true;
+                    document.getElementById('game-over').style.display = 'block';
                 }
             });
-
-            if (aliens.some(alien => alien.y + alienHeight > canvas.height)) {
-                gameOver = true;
-                document.getElementById('game-over').style.display = 'block';
-                document.getElementById('restart-btn').style.display = 'block';
-            }
         }
 
         function gameLoop() {
@@ -212,52 +146,62 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            drawSpaceship();
-            drawAliens();
-            drawLasers();
-            drawPowerUps();
+            drawPlayer();
+            drawBullets();
+            drawEnemies();
 
-            updateAliens();
-            updateLasers();
-            updatePowerUps();
+            updatePlayer();
+            updateBullets();
+            updateEnemies();
             detectCollisions();
-
-            document.getElementById('score').textContent = 'Score: ' + score;
 
             requestAnimationFrame(gameLoop);
         }
 
-        function spawnAliens() {
-            for (let row = 0; row < alienRows; row++) {
-                for (let col = 0; col < alienCols; col++) {
-                    aliens.push({
-                        x: col * (alienWidth + 10) + 30,
-                        y: row * (alienHeight + 10) + 30
-                    });
-                }
+        function spawnEnemies() {
+            for (let i = 0; i < enemiesCount; i++) {
+                enemies.push({
+                    x: Math.random() * (canvas.width - enemySize),
+                    y: -enemySize
+                });
             }
         }
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
-                spaceshipX = Math.max(spaceshipX - moveSpeed, 0);
+                player.dx = -playerSpeed;
             } else if (event.key === 'ArrowRight') {
-                spaceshipX = Math.min(spaceshipX + moveSpeed, canvas.width - spaceshipWidth);
+                player.dx = playerSpeed;
+            } else if (event.key === 'ArrowUp') {
+                player.dy = -playerSpeed;
+            } else if (event.key === 'ArrowDown') {
+                player.dy = playerSpeed;
             } else if (event.key === ' ') {
-                if (lasers.length < maxLasers) {
-                    lasers.push({
-                        x: spaceshipX + spaceshipWidth / 2 - laserWidth / 2,
-                        y: spaceshipY
-                    });
-                }
+                bullets.push({
+                    x: player.x + player.width / 2 - bulletSize / 2,
+                    y: player.y
+                });
             }
         });
 
-        document.getElementById('restart-btn').addEventListener('click', () => {
-            init();
+        document.addEventListener('keyup', (event) => {
+            if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
+                player.dx = 0;
+            }
+            if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
+                player.dy = 0;
+            }
         });
 
-        init();
+        document.getElementById('game-over').addEventListener('click', () => {
+            gameOver = false;
+            document.getElementById('game-over').style.display = 'none';
+            spawnEnemies();
+            gameLoop();
+        });
+
+        spawnEnemies();
+        gameLoop();
     </script>
 </body>
 </html>
