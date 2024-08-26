@@ -5,17 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chic & Colorful Website</title>
     <style>
+        @keyframes gradientAnimation {
+            0% { background: linear-gradient(to right, #ff7e5f, #feb47b); }
+            50% { background: linear-gradient(to right, #6a11cb, #2575fc); }
+            100% { background: linear-gradient(to right, #ff7e5f, #feb47b); }
+        }
+
         body {
             margin: 0;
             font-family: 'Arial', sans-serif;
             color: #333;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background-size: 200% 200%;
+            animation: gradientAnimation 15s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             overflow: hidden;
         }
+
         .container {
             text-align: center;
             padding: 20px;
@@ -25,6 +34,7 @@
             width: 80%;
             max-width: 900px;
         }
+
         h1 {
             font-size: 3em;
             margin: 0;
@@ -34,11 +44,13 @@
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
+
         p {
             font-size: 1.2em;
             line-height: 1.6;
             color: #555;
         }
+
         .btn {
             display: inline-block;
             padding: 15px 30px;
@@ -51,9 +63,11 @@
             text-decoration: none;
             transition: background 0.3s ease;
         }
+
         .btn:hover {
             background: #d84a61;
         }
+
         footer {
             margin-top: 20px;
             font-size: 0.9em;
@@ -65,10 +79,5 @@
     <div class="container">
         <h1>Welcome to Chic & Colorful</h1>
         <p>Your go-to place for vibrant design and style. Dive into a world where every detail shines and every color pops.</p>
-        <a href="#" class="btn">Discover More</a>
-        <footer>
-            &copy; 2024 Chic & Colorful | All Rights Reserved
-        </footer>
-    </div>
-</body>
-</html>
+        <a hr
+
