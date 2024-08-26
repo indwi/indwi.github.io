@@ -25,7 +25,7 @@
             bottom: 10px;
             width: 150px;
             height: 100px;
-            background: url('https://image.shutterstock.com/image-vector/food-truck-icon-fast-food-260nw-1533898696.jpg') no-repeat center center;
+            background: url('https://www.w3schools.com/w3images/foodtruck.jpg') no-repeat center center;
             background-size: cover;
         }
 
@@ -54,7 +54,7 @@
     <script>
         function moveTruck() {
             const truck = document.getElementById('food-truck');
-            let position = 0;
+            let position = -truck.offsetWidth; // Start off-screen on the left
             const screenWidth = window.innerWidth;
             const truckWidth = truck.offsetWidth;
             const speed = 3; // Speed of movement in pixels
