@@ -3,75 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Floral Background</title>
+    <title>Classy Floral Background</title>
     <style>
         body {
             margin: 0;
             overflow: hidden;
-            background: #f0f8ff; /* Light background color */
+            background: #f5f5f5; /* Light, neutral background color */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             position: relative;
+            font-family: 'Georgia', serif; /* Elegant font */
         }
 
         .flower {
             position: absolute;
-            width: 100px;
-            height: 100px;
-            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2L9 7H4v5h5l-3 5 7-5 7 5-3-5h5V7h-5z" fill="%23ff4081"/%3E%3C/svg%3E') no-repeat center;
+            width: 80px;
+            height: 80px;
+            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2L9 7H4v5h5l-3 5 7-5 7 5-3-5h5V7h-5z" fill="%23b39ddb"/%3E%3C/svg%3E') no-repeat center;
             background-size: contain;
-            animation: moveFlower 20s infinite linear;
+            animation: moveFlower 30s ease infinite;
+            opacity: 0.6; /* Slight transparency for a demure look */
         }
 
-        .flower:nth-child(1) { top: 10%; left: 20%; animation-duration: 15s; }
-        .flower:nth-child(2) { top: 20%; left: 50%; animation-duration: 18s; }
-        .flower:nth-child(3) { top: 30%; left: 70%; animation-duration: 12s; }
-        .flower:nth-child(4) { top: 50%; left: 30%; animation-duration: 22s; }
-        .flower:nth-child(5) { top: 60%; left: 80%; animation-duration: 16s; }
+        .flower:nth-child(1) { top: 10%; left: 15%; animation-duration: 25s; }
+        .flower:nth-child(2) { top: 25%; left: 50%; animation-duration: 30s; }
+        .flower:nth-child(3) { top: 40%; left: 70%; animation-duration: 28s; }
+        .flower:nth-child(4) { top: 55%; left: 30%; animation-duration: 32s; }
+        .flower:nth-child(5) { top: 70%; left: 80%; animation-duration: 27s; }
 
         @keyframes moveFlower {
             0% { transform: translate(0, 0); }
-            50% { transform: translate(20px, 20px); }
+            50% { transform: translate(-10px, 10px); }
             100% { transform: translate(0, 0); }
         }
-        
+
         .container {
             text-align: center;
-            padding: 20px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elegance */
             width: 80%;
-            max-width: 900px;
+            max-width: 800px;
             position: relative;
             z-index: 1;
         }
 
         h1 {
-            font-size: 3em;
+            font-size: 2.5em;
             margin: 0;
             color: #333;
-            background: -webkit-linear-gradient(left, #ff6f61, #d9a7c7);
+            background: linear-gradient(to right, #9e9e9e, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 1.2em;
-            line-height: 1.6;
-            color: #555;
+            font-size: 1.1em;
+            line-height: 1.5;
+            color: #666;
         }
 
         .btn {
             display: inline-block;
-            padding: 15px 30px;
-            margin: 20px 0;
+            padding: 12px 25px;
+            margin: 15px 0;
             font-size: 1em;
             color: #fff;
-            background: #ff6f61;
+            background: #9e9e9e;
             border: none;
             border-radius: 5px;
             text-decoration: none;
@@ -79,13 +81,13 @@
         }
 
         .btn:hover {
-            background: #d84a61;
+            background: #7d7d7d;
         }
 
         footer {
             margin-top: 20px;
             font-size: 0.9em;
-            color: #777;
+            color: #888;
         }
     </style>
 </head>
@@ -97,11 +99,11 @@
     <div class="flower"></div>
 
     <div class="container">
-        <h1>Welcome to Chic & Floral</h1>
-        <p>Explore a modern floral design with animated flowers. Perfect for a vibrant and stylish backdrop.</p>
-        <a href="#" class="btn">Discover More</a>
+        <h1>Welcome to a Classy Floral Escape</h1>
+        <p>Experience a serene and elegant floral backdrop that offers a calm and refined aesthetic for your browsing pleasure.</p>
+        <a href="#" class="btn">Learn More</a>
         <footer>
-            &copy; 2024 Chic & Floral | All Rights Reserved
+            &copy; 2024 Classy Floral Escape | All Rights Reserved
         </footer>
     </div>
 </body>
