@@ -3,109 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Square Dodging Game</title>
+    <title>Space Invaders Game</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             overflow: hidden;
-            background: #333;
-            color: #fff;
+            background: black;
+            color: white;
             font-family: Arial, sans-serif;
         }
 
         canvas {
             display: block;
-            background: #222;
             margin: 0 auto;
+            background: #000;
         }
 
         #score {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 10px;
+            left: 10px;
             font-size: 24px;
+            z-index: 1;
+        }
+
+        #game-over {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 48px;
+            color: red;
+            display: none;
+            z-index: 1;
         }
     </style>
 </head>
 <body>
     <div id="score">Score: 0</div>
+    <div id="game-over">Game Over!</div>
     <canvas id="gameCanvas"></canvas>
 
     <script>
-        // Game setup
+        // Game Setup
         const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
-        const playerSize = 50;
-        const blockSize = 50;
-        const blockSpeed = 5;
-        let playerX = canvas.width / 2 - playerSize / 2;
-        let playerY = canvas.height - playerSize - 10;
-        let blocks = [];
+        const spaceshipWidth = 50;
+        const spaceshipHeight = 30;
+        const laserWidth = 5;
+        const laserHeight = 20;
+        const alienWidth = 40;
+        const alienHeight = 30;
+        const alienRows = 4;
+        const alienCols = 8;
+        const alienSpeed = 2;
+        const laserSpeed = 7;
+        const moveSpeed = 5;
+        const maxLasers = 3;
+
+        let spaceshipX = canvas.width / 2 - spaceshipWidth / 2;
+        let spaceshipY = canvas.height - spaceshipHeight - 10;
+        let aliens = [];
+        let lasers = [];
         let score = 0;
+        let gameOver = false;
 
-        function drawPlayer() {
-            ctx.fillStyle = 'lime';
-            ctx.fillRect(playerX, playerY, playerSize, playerSize);
+        // Draw functions
+        function drawSpaceship() {
+            ctx.fillStyle = 'white';
+            ctx.fillRect(spaceshipX, spaceshipY, spaceshipWidth, spaceshipHeight);
         }
 
-        function drawBlocks() {
+        function drawAliens() {
+            ctx.fillStyle = 'green';
+            aliens.forEach(alien => {
+                ctx.fillRect(alien.x, alien.y, alienWidth, alienHeight);
+            });
+        }
+
+        function drawLasers() {
             ctx.fillStyle = 'red';
-            blocks.forEach(block => {
-                ctx.fillRect(block.x, block.y, blockSize, blockSize);
+            lasers.forEach(laser => {
+                ctx.fillRect(laser.x, laser.y, laserWidth, laserHeight);
             });
         }
 
-        function updateBlocks() {
-            blocks.forEach(block => {
-                block.y += blockSpeed;
+        function updateAliens() {
+            let moveDown = false;
+            aliens.forEach(alien => {
+                alien.x += alienSpeed;
+                if (alien.x > canvas.width - alienWidth || alien.x < 0) {
+                    moveDown = true;
+                }
             });
-            blocks = blocks.filter(block => block.y < canvas.height);
+            if (moveDown) {
+                aliens.forEach(alien => {
+                    alien.x += alienSpeed * (alien.x > canvas.width - alienWidth ? -1 : 1);
+                    alien.y += alienHeight;
+                });
+            }
         }
 
-        function detectCollision() {
-            return blocks.some(block => {
-                return (
-                    playerX < block.x + blockSize &&
-                    playerX + playerSize > block.x &&
-                    playerY < block.y + blockSize &&
-                    playerY + playerSize > block.y
-                );
+        function updateLasers() {
+            lasers = lasers.map(laser => ({
+                x: laser.x,
+                y: laser.y - laserSpeed
+            })).filter(laser => laser.y > 0);
+        }
+
+        function detectCollisions() {
+            lasers.forEach((laser, laserIndex) => {
+                aliens.forEach((alien, alienIndex) => {
+                    if (
+                        laser.x < alien.x + alienWidth &&
+                        laser.x + laserWidth > alien.x &&
+                        laser.y < alien.y + alienHeight &&
+                        laser.y + laserHeight > alien.y
+                    ) {
+                        score += 10;
+                        aliens.splice(alienIndex, 1);
+                        lasers.splice(laserIndex, 1);
+                    }
+                });
             });
+            if (aliens.some(alien => alien.y + alienHeight > canvas.height)) {
+                gameOver = true;
+                document.getElementById('game-over').style.display = 'block';
+            }
         }
 
         function gameLoop() {
+            if (gameOver) return;
+
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawPlayer();
-            drawBlocks();
-            updateBlocks();
-            if (detectCollision()) {
-                alert('Game Over! Your Score: ' + score);
-                document.location.reload();
-            }
+
+            drawSpaceship();
+            drawAliens();
+            drawLasers();
+
+            updateAliens();
+            updateLasers();
+            detectCollisions();
+
+            document.getElementById('score').textContent = 'Score: ' + score;
+
             requestAnimationFrame(gameLoop);
         }
 
-        function spawnBlock() {
-            const x = Math.random() * (canvas.width - blockSize);
-            blocks.push({ x: x, y: -blockSize });
-            score++;
-            document.getElementById('score').textContent = 'Score: ' + score;
+        function spawnAliens() {
+            for (let row = 0; row < alienRows; row++) {
+                for (let col = 0; col < alienCols; col++) {
+                    aliens.push({
+                        x: col * (alienWidth + 10) + 30,
+                        y: row * (alienHeight + 10) + 30
+                    });
+                }
+            }
         }
 
         document.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
-                playerX = Math.max(playerX - 20, 0);
+                spaceshipX = Math.max(spaceshipX - moveSpeed, 0);
             } else if (event.key === 'ArrowRight') {
-                playerX = Math.min(playerX + 20, canvas.width - playerSize);
+                spaceshipX = Math.min(spaceshipX + moveSpeed, canvas.width - spaceshipWidth);
+            } else if (event.key === ' ') {
+                if (lasers.length < maxLasers) {
+                    lasers.push({
+                        x: spaceshipX + spaceshipWidth / 2 - laserWidth / 2,
+                        y: spaceshipY
+                    });
+                }
             }
         });
 
-        setInterval(spawnBlock, 1000); // Spawn a new block every second
+        spawnAliens();
         gameLoop();
     </script>
 </body>
 </html>
+
