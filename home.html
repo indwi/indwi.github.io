@@ -3,94 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scary Homepage with Jump Scares</title>
+    <title>Food Truck Adventure</title>
     <style>
         body {
             margin: 0;
-            height: 100vh;
-            background: url('https://www.w3schools.com/w3images/forest.jpg') no-repeat center center fixed;
-            background-size: cover;
             overflow: hidden;
-            color: #fff;
             font-family: Arial, sans-serif;
+            background: linear-gradient(to bottom, #f8c291, #e77f7f); /* Gradient background */
             text-align: center;
-            position: relative;
-        }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            padding: 20px;
-        }
-
-        .hidden-scare {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8) url('https://www.w3schools.com/w3images/forest.jpg') no-repeat center center;
-            background-size: cover;
             color: #fff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        }
+
+        .container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        .food-truck {
+            position: absolute;
+            bottom: 10px;
+            width: 150px;
+            height: 100px;
+            background: url('https://image.shutterstock.com/image-vector/food-truck-icon-fast-food-260nw-1533898696.jpg') no-repeat center center;
+            background-size: cover;
+        }
+
+        h1 {
+            margin-top: 20px;
             font-size: 3em;
-            z-index: 10;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-        .scare-image {
-            width: 80%;
-            max-width: 600px;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-
-        .show {
-            display: flex;
-        }
-
-        .show .scare-image {
-            opacity: 1;
-        }
-
-        .hidden-scare h1 {
-            color: red;
-            font-size: 5em;
+        p {
+            font-size: 1.5em;
+            color: #fff;
+            margin: 0;
+            padding: 0;
         }
     </style>
 </head>
 <body>
-    <div class="content">
-        <h1>Welcome to the Haunted House</h1>
-        <p>Brace yourself for a chilling experience. Stay alert for surprises!</p>
+    <div class="container">
+        <h1>Welcome to the Food Truck Adventure!</h1>
+        <p>Catch our food truck as it moves across the screen!</p>
+        <div id="food-truck" class="food-truck"></div>
     </div>
-
-    <div id="scare" class="hidden-scare">
-        <img src="https://www.w3schools.com/w3images/lights.jpg" alt="Jump Scare" class="scare-image">
-    </div>
-
-    <audio id="jump-scare-sound" src="https://www.soundjay.com/button/beep-07.wav"></audio>
 
     <script>
-        // Function to trigger jump scare
-        function triggerScare() {
-            const scareElement = document.getElementById('scare');
-            const scareSound = document.getElementById('jump-scare-sound');
+        function moveTruck() {
+            const truck = document.getElementById('food-truck');
+            let position = 0;
+            const screenWidth = window.innerWidth;
+            const truckWidth = truck.offsetWidth;
+            const speed = 3; // Speed of movement in pixels
 
-            scareElement.classList.add('show');
-            scareSound.play();
+            function animate() {
+                position += speed;
+                if (position > screenWidth) {
+                    position = -truckWidth; // Reset to start
+                }
+                truck.style.left = position + 'px';
+                requestAnimationFrame(animate);
+            }
 
-            // Hide the scare after 3 seconds
-            setTimeout(() => {
-                scareElement.classList.remove('show');
-            }, 3000); // 3 seconds duration
+            animate();
         }
 
-        // Trigger the scare after a random delay between 5 and 15 seconds
-        const randomDelay = Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000;
-        setTimeout(triggerScare, randomDelay);
+        moveTruck();
     </script>
 </body>
 </html>
