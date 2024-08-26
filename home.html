@@ -8,34 +8,62 @@
         body {
             margin: 0;
             overflow: hidden;
-            background: #f5f5f5; /* Light, neutral background color */
+            background: #f5f5f5; /* Light neutral background */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            position: relative;
             font-family: 'Georgia', serif; /* Elegant font */
+            position: relative;
         }
 
         .flower {
             position: absolute;
             width: 80px;
             height: 80px;
-            background: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2L9 7H4v5h5l-3 5 7-5 7 5-3-5h5V7h-5z" fill="%23b39ddb"/%3E%3C/svg%3E') no-repeat center;
-            background-size: contain;
-            animation: moveFlower 30s ease infinite;
-            opacity: 0.6; /* Slight transparency for a demure look */
+            background-size: cover;
+            animation: moveFlower 30s ease-in-out infinite;
+            opacity: 0.7; /* Slight transparency for subtlety */
         }
 
-        .flower:nth-child(1) { top: 10%; left: 15%; animation-duration: 25s; }
-        .flower:nth-child(2) { top: 25%; left: 50%; animation-duration: 30s; }
-        .flower:nth-child(3) { top: 40%; left: 70%; animation-duration: 28s; }
-        .flower:nth-child(4) { top: 55%; left: 30%; animation-duration: 32s; }
-        .flower:nth-child(5) { top: 70%; left: 80%; animation-duration: 27s; }
+        .flower:nth-child(1) {
+            top: 10%;
+            left: 20%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.5 7.5h7.5l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="%23ff4081"/%3E%3C/svg%3E');
+            animation-duration: 25s;
+        }
+
+        .flower:nth-child(2) {
+            top: 25%;
+            left: 50%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.5 7.5h7.5l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="%23f48fb1"/%3E%3C/svg%3E');
+            animation-duration: 22s;
+        }
+
+        .flower:nth-child(3) {
+            top: 40%;
+            left: 70%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.5 7.5h7.5l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="%23e1bee7"/%3E%3C/svg%3E');
+            animation-duration: 30s;
+        }
+
+        .flower:nth-child(4) {
+            top: 55%;
+            left: 30%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.5 7.5h7.5l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="%23ce93d8"/%3E%3C/svg%3E');
+            animation-duration: 28s;
+        }
+
+        .flower:nth-child(5) {
+            top: 70%;
+            left: 80%;
+            background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"%3E%3Cpath d="M12 2l2.5 7.5h7.5l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="%23f48fb1"/%3E%3C/svg%3E');
+            animation-duration: 26s;
+        }
 
         @keyframes moveFlower {
             0% { transform: translate(0, 0); }
-            50% { transform: translate(-10px, 10px); }
+            50% { transform: translate(-20px, 20px); }
             100% { transform: translate(0, 0); }
         }
 
@@ -44,7 +72,7 @@
             padding: 30px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elegance */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
             width: 80%;
             max-width: 800px;
             position: relative;
@@ -100,7 +128,7 @@
 
     <div class="container">
         <h1>Welcome to a Classy Floral Escape</h1>
-        <p>Experience a serene and elegant floral backdrop that offers a calm and refined aesthetic for your browsing pleasure.</p>
+        <p>Immerse yourself in a serene floral backdrop with subtle, elegant animations for a refined and tranquil experience.</p>
         <a href="#" class="btn">Learn More</a>
         <footer>
             &copy; 2024 Classy Floral Escape | All Rights Reserved
@@ -108,5 +136,6 @@
     </div>
 </body>
 </html>
+
 
 
