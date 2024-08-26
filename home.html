@@ -3,205 +3,170 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Shooter Game</title>
+    <title>Stylish and Cute Website</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <style>
         body {
             margin: 0;
             padding: 0;
-            overflow: hidden;
-            background: #87CEFA; /* Sky blue */
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f0f8ff, #e6e6fa); /* Gradient background */
+            color: #333;
+            overflow-x: hidden;
         }
 
-        canvas {
-            display: block;
-            margin: 0 auto;
-            background: #228B22; /* Forest green */
+        header {
+            background: #ff69b4; /* Hot Pink */
+            color: #fff;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        #game-over {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 48px;
-            color: red;
-            display: none;
-            z-index: 1;
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 1.5rem;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #ffeb3b; /* Yellow */
+            color: #ff69b4; /* Hot Pink */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            margin: 1rem;
+            width: 300px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card img {
+            border-radius: 15px;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .card img:hover {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            margin: 1rem 0;
+            font-size: 1.7rem;
+            color: #ff69b4; /* Hot Pink */
+        }
+
+        .card p {
+            color: #555;
+        }
+
+        footer {
+            background: #ff69b4; /* Hot Pink */
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav a {
+                margin: 0 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
-    <div id="game-over">Game Over!</div>
-    <canvas id="gameCanvas"></canvas>
+    <header>
+        <h1>My Stylish & Cute Website</h1>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-    <script>
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+    <div class="container">
+        <div id="home" class="card">
+            <img src="https://via.placeholder.com/300" alt="Cute Illustration">
+            <h2>Welcome</h2>
+            <p>Welcome to my stylish and cute website. Explore and enjoy!</p>
+        </div>
+        <div id="about" class="card">
+            <img src="https://via.placeholder.com/300" alt="About Illustration">
+            <h2>About Me</h2>
+            <p>This section gives you a glimpse into who I am and what I do.</p>
+        </div>
+        <div id="contact" class="card">
+            <img src="https://via.placeholder.com/300" alt="Contact Illustration">
+            <h2>Contact</h2>
+            <p>Get in touch with me through the contact form below.</p>
+        </div>
+    </div>
 
-        const playerSize = 30;
-        const bulletSize = 5;
-        const bulletSpeed = 7;
-        const playerSpeed = 5;
-        const enemySize = 30;
-        const enemySpeed = 2;
-        const enemiesCount = 5;
-
-        let player = {
-            x: canvas.width / 2 - playerSize / 2,
-            y: canvas.height - playerSize - 10,
-            width: playerSize,
-            height: playerSize,
-            color: 'blue',
-            dx: 0,
-            dy: 0
-        };
-
-        let bullets = [];
-        let enemies = [];
-        let gameOver = false;
-
-        function drawPlayer() {
-            ctx.fillStyle = player.color;
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-        }
-
-        function drawBullets() {
-            ctx.fillStyle = 'red';
-            bullets.forEach(bullet => {
-                ctx.fillRect(bullet.x, bullet.y, bulletSize, bulletSize);
-            });
-        }
-
-        function drawEnemies() {
-            ctx.fillStyle = 'green';
-            enemies.forEach(enemy => {
-                ctx.fillRect(enemy.x, enemy.y, enemySize, enemySize);
-            });
-        }
-
-        function updatePlayer() {
-            player.x += player.dx;
-            player.y += player.dy;
-
-            // Keep player within bounds
-            if (player.x < 0) player.x = 0;
-            if (player.x + player.width > canvas.width) player.x = canvas.width - player.width;
-            if (player.y < 0) player.y = 0;
-            if (player.y + player.height > canvas.height) player.y = canvas.height - player.height;
-        }
-
-        function updateBullets() {
-            bullets = bullets.map(bullet => ({
-                x: bullet.x,
-                y: bullet.y - bulletSpeed
-            })).filter(bullet => bullet.y > 0);
-        }
-
-        function updateEnemies() {
-            enemies = enemies.map(enemy => ({
-                x: enemy.x,
-                y: enemy.y + enemySpeed
-            })).filter(enemy => enemy.y < canvas.height);
-
-            // Check for game over
-            if (enemies.some(enemy => enemy.y + enemySize > canvas.height)) {
-                gameOver = true;
-                document.getElementById('game-over').style.display = 'block';
-            }
-        }
-
-        function detectCollisions() {
-            bullets.forEach((bullet, bulletIndex) => {
-                enemies.forEach((enemy, enemyIndex) => {
-                    if (
-                        bullet.x < enemy.x + enemySize &&
-                        bullet.x + bulletSize > enemy.x &&
-                        bullet.y < enemy.y + enemySize &&
-                        bullet.y + bulletSize > enemy.y
-                    ) {
-                        bullets.splice(bulletIndex, 1);
-                        enemies.splice(enemyIndex, 1);
-                    }
-                });
-            });
-
-            enemies.forEach((enemy, enemyIndex) => {
-                if (
-                    player.x < enemy.x + enemySize &&
-                    player.x + player.width > enemy.x &&
-                    player.y < enemy.y + enemySize &&
-                    player.y + player.height > enemy.y
-                ) {
-                    gameOver = true;
-                    document.getElementById('game-over').style.display = 'block';
-                }
-            });
-        }
-
-        function gameLoop() {
-            if (gameOver) return;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            drawPlayer();
-            drawBullets();
-            drawEnemies();
-
-            updatePlayer();
-            updateBullets();
-            updateEnemies();
-            detectCollisions();
-
-            requestAnimationFrame(gameLoop);
-        }
-
-        function spawnEnemies() {
-            for (let i = 0; i < enemiesCount; i++) {
-                enemies.push({
-                    x: Math.random() * (canvas.width - enemySize),
-                    y: -enemySize
-                });
-            }
-        }
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'ArrowLeft') {
-                player.dx = -playerSpeed;
-            } else if (event.key === 'ArrowRight') {
-                player.dx = playerSpeed;
-            } else if (event.key === 'ArrowUp') {
-                player.dy = -playerSpeed;
-            } else if (event.key === 'ArrowDown') {
-                player.dy = playerSpeed;
-            } else if (event.key === ' ') {
-                bullets.push({
-                    x: player.x + player.width / 2 - bulletSize / 2,
-                    y: player.y
-                });
-            }
-        });
-
-        document.addEventListener('keyup', (event) => {
-            if (['ArrowLeft', 'ArrowRight'].includes(event.key)) {
-                player.dx = 0;
-            }
-            if (['ArrowUp', 'ArrowDown'].includes(event.key)) {
-                player.dy = 0;
-            }
-        });
-
-        document.getElementById('game-over').addEventListener('click', () => {
-            gameOver = false;
-            document.getElementById('game-over').style.display = 'none';
-            spawnEnemies();
-            gameLoop();
-        });
-
-        spawnEnemies();
-        gameLoop();
-    </script>
+    <footer>
+        <p>&copy; 2024 My Stylish & Cute Website</p>
+    </footer>
 </body>
 </html>
