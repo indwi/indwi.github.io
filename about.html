@@ -3,119 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us</title>
+    <title>About Me - indi's website</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <style>
         body {
-            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            color: #333;
-            background-color: #f9f9f9;
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(to bottom, #f0f8ff, #e6e6fa); /* Gradient background */
+            color: #9ca5b5;
+            overflow-x: hidden;
         }
+
         header {
-            background-color: #333;
+            background: #9ca5b5; /* Blue */
             color: #fff;
-            padding: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+        }
+
+        nav {
+            margin: 1rem 0;
             text-align: center;
         }
-        nav {
-            margin: 0;
-            padding: 10px;
-            background-color: #444;
-        }
-        nav ul {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-        nav ul li {
-            display: inline;
-            margin-right: 10px;
-        }
-        nav ul li a {
+
+        nav a {
             color: #fff;
             text-decoration: none;
-            padding: 10px 15px;
-            display: inline-block;
+            margin: 0 1.5rem;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
         }
-        nav ul li a:hover {
-            background-color: #575757;
+
+        nav a:hover {
+            background-color: #79808c; /* Darker Blue */
+            color: #ffffff; /* White */
         }
+
         .container {
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        .container h2 {
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
-        .team-member {
             display: flex;
+            flex-direction: column;
             align-items: center;
-            margin-bottom: 20px;
+            padding: 2rem;
         }
-        .team-member img {
-            border-radius: 50%;
-            margin-right: 15px;
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-        }
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 10px;
+
+        .card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            margin: 1rem;
+            width: 80%;
+            max-width: 600px;
             text-align: center;
-            border-top: 2px solid #444;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card img {
+            border-radius: 15px;
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s;
+        }
+
+        .card img:hover {
+            transform: scale(1.1);
+        }
+
+        .card h2 {
+            margin: 1rem 0;
+            font-size: 1.7rem;
+            color: #79808c; /* Darker Blue */
+        }
+
+        .card p {
+            color: #555;
+        }
+
+        footer {
+            background: #9ca5b5; /* Blue */
+            color: #fff;
+            text-align: center;
+            padding: 1.5rem;
             position: fixed;
             width: 100%;
             bottom: 0;
+            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                width: 90%;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            nav a {
+                margin: 0 1rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+
+            nav a {
+                margin: 0 0.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>About Us</h1>
-        <p>Learn more about our team and mission.</p>
+        <h1>About Me - indi's website</h1>
+        <nav>
+            <a href="#about">About Me</a>
+            <a href="#interests">Interests</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
-    <nav>
-        <ul>
-            <li><a href="home.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
+
     <div class="container">
-        <h2>Our Mission</h2>
-        <p>at indi's site, our mission is to provide exceptional information to our clients while maintaining the highest standards of quality and integrity. we are dedicated to innovation, customer satisfaction, and fostering a positive impact on our community.</p>
-        
-        <h2>team</h2>
-        <div class="team-member">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcPxfhhRVEaDfoXeO6sOiArX96sfRpBrYo3Q&s" alt="Team Member 1">
-            <div>
-                <h3>indi</h3>
-                <p>indi is the leader</p>
-            </div>
+        <div id="about" class="card">
+            <img src="https://via.placeholder.com/600x400" alt="About Me Illustration">
+            <h2>About Me</h2>
+            <p>Hello! I'm Indi, a passionate web designer and developer. I love creating beautiful and functional websites that make a difference. With a background in both design and programming, I bring a unique perspective to every project.</p>
         </div>
-        <div class="team-member">
-            <img src="https://as2.ftcdn.net/v2/jpg/00/88/53/89/1000_F_88538986_5Bi4eJ667pocsO3BIlbN4fHKz8yUFSuA.jpg" alt="Team Member 2">
-            <div>
-                <h3>john</h3>
-                <p>John is our Chief Technology Officer. He oversees all technical aspects of our products and ensures that we stay ahead of technological trends.</p>
-            </div>
+        <div id="interests" class="card">
+            <img src="https://via.placeholder.com/600x400" alt="Interests Illustration">
+            <h2>Interests</h2>
+            <p>In my free time, I enjoy exploring new technologies, experimenting with creative design projects, and hiking in nature. I'm always looking for new ways to blend my interests with my work to create something special.</p>
         </div>
-        
-        
-        <h2>history</h2>
-        <p>indis site was founded in 2024 with a vision to inform. over the years, we have grown and adapted to meet the needs of our clients, always with a commitment to excellence.</p>
+        <div id="contact" class="card">
+            <img src="https://via.placeholder.com/600x400" alt="Contact Illustration">
+            <h2>Contact</h2>
+            <p>If you'd like to get in touch with me, feel free to reach out via the contact form below or connect with me on social media.</p>
+        </div>
     </div>
+
     <footer>
-        <p>&copy; 2024 indis site. all rights reserved.</p>
+        <p>&copy; 2024 indi's website</p>
     </footer>
 </body>
 </html>
