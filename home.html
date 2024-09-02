@@ -4,221 +4,214 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>indi's shop</title>
-    </* Reset some default styles */
-body, h1, h2, p, ul, li, a {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Basic styling for the body */
-body {
-    font-family: Arial, sans-serif;
-    color: #333;
-    line-height: 1.6;
-    background-color: #f4f4f4;
-}
-
-/* Header styling */
-header {
-    background-color: #444;
-    color: #fff;
-    padding: 1rem 0;
-}
-
-header .container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header h1 {
-    font-size: 2rem;
-}
-
-header nav ul {
-    list-style: none;
-    display: flex;
-}
-
-header nav ul li {
-    margin: 0 1rem;
-}
-
-header nav ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1rem;
-}
-
-header nav ul li a:hover {
-    text-decoration: underline;
-}
-
-/* Hero section styling */
-.hero {
-    background: url('hero-bg.jpg') no-repeat center center/cover;
-    color: #fff;
-    text-align: center;
-    padding: 4rem 1rem;
-}
-
-.hero-content {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.hero h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-}
-
-.hero p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-}
-
-.hero .btn {
-    background-color: #ff6f61;
-    color: #fff;
-    padding: 0.75rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.hero .btn:hover {
-    background-color: #ff3b2e;
-}
-
-/* About section styling */
-.about {
-    padding: 2rem 1rem;
-    background-color: #fff;
-}
-
-.about .container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.about h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.about p {
-    font-size: 1.2rem;
-    line-height: 1.5;
-}
-
-/* Gallery section styling */
-.gallery {
-    padding: 2rem 1rem;
-    background-color: #f4f4f4;
-}
-
-.gallery .container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.gallery h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-
-.gallery-item img:hover {
-    transform: scale(1.05);
-}
-
-/* Contact section styling */
-.contact {
-    padding: 2rem 1rem;
-    background-color: #fff;
-}
-
-.contact .container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.contact h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-}
-
-.contact form {
-    display: flex;
-    flex-direction: column;
-}
-
-.contact label {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-}
-
-.contact input, .contact textarea {
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.contact button {
-    background-color: #ff6f61;
-    color: #fff;
-    padding: 0.75rem;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-}
-
-.contact button:hover {
-    background-color: #ff3b2e;
-}
-
-/* Footer styling */
-footer {
-    background-color: #444;
-    color: #fff;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-footer p {
-    font-size: 0.9rem;
-}
->
     <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>indi's shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #444;
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        header .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Hero section styling */
+        .hero {
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: #fff;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero .btn {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .hero .btn:hover {
+            background-color: #ff3b2e;
+        }
+
+        /* About section styling */
+        .about {
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .about .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* Gallery section styling */
+        .gallery {
+            padding: 2rem 1rem;
+            background-color: #f4f4f4;
+        }
+
+        .gallery .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact section styling */
+        .contact {
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .contact .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact input, .contact textarea {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .contact button {
+            background-color: #ff6f61;
+            color: #fff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .contact button:hover {
+            background-color: #ff3b2e;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #444;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -285,7 +278,5 @@ footer p {
             <p>&copy; 2024 indi's shop. all rights reserved.</p>
         </div>
     </footer>
-</body>
-</html>>
 </body>
 </html>
