@@ -3,171 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - indi's website</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>About Indi</title>
+    <link rel="stylesheet" href="styles.css">
     <style>
-        body {
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li, a {
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: linear-gradient(to bottom, #f0f8ff, #e6e6fa); /* Gradient background */
-            color: #9ca5b5;
-            overflow-x: hidden;
+            box-sizing: border-box;
         }
 
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+
+        /* Header styling */
         header {
-            background: #9ca5b5; /* Blue */
+            background-color: #6a5acd;
             color: #fff;
-            padding: 1.5rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        header .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-            letter-spacing: 1px;
+            font-size: 2rem;
         }
 
-        nav {
-            margin: 1rem 0;
-            text-align: center;
+        header nav ul {
+            list-style: none;
+            display: flex;
         }
 
-        nav a {
+        header nav ul li {
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
             color: #fff;
             text-decoration: none;
-            margin: 0 1.5rem;
-            font-size: 1.2rem;
-            padding: 0.5rem;
-            border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        nav a:hover {
-            background-color: #79808c; /* Darker Blue */
-            color: #ffffff; /* White */
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
-
-        .card {
-            background: #fff;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            margin: 1rem;
-            width: 80%;
-            max-width: 600px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .card img {
-            border-radius: 15px;
-            width: 100%;
-            height: auto;
-            transition: transform 0.3s;
-        }
-
-        .card img:hover {
-            transform: scale(1.1);
-        }
-
-        .card h2 {
-            margin: 1rem 0;
-            font-size: 1.7rem;
-            color: #79808c; /* Darker Blue */
-        }
-
-        .card p {
-            color: #555;
-        }
-
-        footer {
-            background: #9ca5b5; /* Blue */
-            color: #fff;
-            text-align: center;
-            padding: 1.5rem;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        footer p {
-            margin: 0;
             font-size: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .card {
-                width: 90%;
-            }
-
-            header h1 {
-                font-size: 2rem;
-            }
-
-            nav a {
-                margin: 0 1rem;
-                font-size: 1rem;
-            }
+        header nav ul li a:hover {
+            text-decoration: underline;
         }
 
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
+        /* About section styling */
+        .about {
+            padding: 4rem 1rem;
+            background-color: #fff;
+            text-align: center;
+        }
 
-            nav a {
-                margin: 0 0.5rem;
-                font-size: 0.9rem;
-            }
+        .about .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #6a5acd;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+            color: #555;
+        }
+
+        .about img {
+            margin-top: 2rem;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #6a5acd;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>about me</h1>
-        <nav>
-            <a href="home.html">home</a>
-            <a href="about.html">about me</a>
-            <a href="contact.html">contact</a>
-        </nav>
+        <div class="container">
+            <h1>About Indi</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <div class="container">
-        <div id="about" class="card">
-            <img src="https://via.placeholder.com/600x400" alt="About Me Illustration">
-            <h2>About Me</h2>
-            <p>Hello! I'm Indi, a passionate web designer and developer. I love creating beautiful and functional websites that make a difference. With a background in both design and programming, I bring a unique perspective to every project.</p>
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Hello, I'm Indi</h2>
+            <p>Welcome to my personal website! I'm passionate about storytelling, and I love to explore different cultures, especially the rich traditions of the Aboriginal people. My work often reflects my deep interest in these themes, with a focus on vivid descriptions and sensory details that bring my stories to life.</p>
+            <img src="indi.jpg" alt="Photo of Indi">
         </div>
-        <div id="interests" class="card">
-            <img src="https://via.placeholder.com/600x400" alt="Interests Illustration">
-            <h2>Interests</h2>
-            <p>In my free time, I enjoy exploring new technologies, experimenting with creative design projects, and hiking in nature. I'm always looking for new ways to blend my interests with my work to create something special.</p>
-        </div>
-        <div id="contact" class="card">
-            <img src="https://via.placeholder.com/600x400" alt="Contact Illustration">
-            <h2>Contact</h2>
-            <p>If you'd like to get in touch with me, feel free to reach out via the contact form below or connect with me on social media.</p>
-        </div>
-    </div>
+    </section>
 
     <footer>
-        <p>&copy; 2024 indi's website</p>
+        <div class="container">
+            <p>&copy; 2024 Indi. All rights reserved.</p>
+        </div>
     </footer>
 </body>
 </html>
+
