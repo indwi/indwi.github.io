@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message = htmlspecialchars(trim($_POST['message']));
 
     // Email settings
-    $to = "s010150@victorycollege.com";  // Replace with your actual email address
+    $to = "s010150@victorycollege.com";  
     $subject = "New Message from Contact Form";
     $headers = "From: " . $email . "\r\n" .
                "Reply-To: " . $email . "\r\n" .
@@ -22,7 +22,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (mail($to, $subject, $email_body, $headers)) {
         echo "Message sent successfully!";
     } else {
-        echo "Message failed to send.";
+        echo "Message failed to send. Please try again later.";
     }
+
+    // Debugging: Check for errors
+    error_log("Email sending failed: " . error_get_last()['message']);
 }
 ?>
