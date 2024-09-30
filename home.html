@@ -184,6 +184,12 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 1rem;
+            transition: border-color 0.3s ease; /* Smooth transition */
+        }
+
+        .contact input:focus, .contact textarea:focus {
+            border-color: #FFC0CB; /* Highlight color set to pink */
+            outline: none; /* Remove default outline */
         }
 
         .contact button {
