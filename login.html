@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>indi's shop - login</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            color: #4A4A4A; /* Dark gray for text */
+            line-height: 1.6;
+            background-color: #FFFFFF; /* White background */
+        }
+
+        /* Header styling */
+        header {
+            background-color: #FFC0CB; /* Soft Pink */
+            color: #fff;
+            padding: 1rem 0;
+        }
+
+        header .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login form styling */
+        .login {
+            padding: 2rem 1rem;
+            background-color: #fff;
+            max-width: 400px;
+            margin: 2rem auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .login h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .login label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .login input {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            width: 100%; /* Full width */
+        }
+
+        .login button {
+            background-color: #FFC0CB; /* Soft Pink for button */
+            color: #fff;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%; /* Full width */
+        }
+
+        .login button:hover {
+            background-color: #FFB6C1; /* Lighter Pink for hover */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #FFC0CB; /* Soft Pink */
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>indi's shop</h1>
+            <nav>
+                <ul>
+                    <li><a href="home.html">home</a></li>
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="gallery.html">gallery</a></li>
+                    <li><a href="contact.html">contact</a></li>
+                </ul>
+            </nav>
+            <a href="login.html" class="login-button">login</a>
+        </div>
+    </header>
+
+    <section class="login">
+        <h2>login</h2>
+        <form action="authenticate.php" method="post">
+            <label for="username">username</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">password</label>
+            <input type="password" id="password" name="password" required>
+
+            <button type="submit">log in</button>
+        </form>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 indi's shop. all rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
 
