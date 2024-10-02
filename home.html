@@ -60,7 +60,7 @@
             text-decoration: underline;
         }
 
-        /* login button styling */
+        /* Login button styling */
         .login-button {
             background-color: #FFB6C1; /* Light pink */
             color: #fff;
@@ -70,10 +70,11 @@
             cursor: pointer;
             text-decoration: none;
             font-size: 1rem;
+            text-transform: lowercase; /* Lowercase text */
         }
 
         .login-button:hover {
-            background-color: #FF69B4; /* Hot pink */
+            background-color: #ffb0be; /* Hot pink */
         }
 
         /* Hero section styling */
@@ -108,52 +109,7 @@
         }
 
         .hero .btn:hover {
-            background-color: #ffb0be; 
-        }
-
-        /* Login section styling */
-        .login-container {
-            background: white;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            max-width: 300px;
-            margin: 20px auto; /* Center it */
-        }
-
-        .login-container h2 {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .login-container .form-group {
-            margin-bottom: 15px;
-        }
-
-        .login-container label {
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 10px;
-            background-color: #FFC0CB;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .login-container button:hover {
-            background-color: #FFB6C1;
+            background-color: #ffb0be; /* Darker Mint Green for hover */
         }
 
         /* About section styling */
@@ -291,7 +247,7 @@
                     <li><a href="contact.html">contact</a></li>
                 </ul>
             </nav>
-            <a href="#login" class="login-button">Login</a>
+            <a href="login.html" class="login-button">login</a> <!-- Redirects to login.html -->
         </div>
     </header>
 
@@ -337,24 +293,6 @@
 
                 <button type="submit" class="btn">send message</button>
             </form>
-        </div>
-    </section>
-
-    <section id="login" class="login">
-        <div class="login-container">
-            <h2>Login</h2>
-            <form action="login.php" method="POST">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <input type="text" id="username" name="username" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
-            <p>Don't have an account? <a href="register.html">Register here</a></p>
         </div>
     </section>
 
