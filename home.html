@@ -77,6 +77,19 @@
             background-color: #ffb0be; /* Hot pink */
         }
 
+        /* Login section styling */
+        .login-section {
+            display: none; /* Hidden by default */
+            padding: 2rem;
+            background-color: #fff;
+            max-width: 400px;
+            margin: 2rem auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Additional styling sections... (hero, about, gallery, contact, footer) */
+
         /* Hero section styling */
         .hero {
             background: url('hero-bg.jpg') no-repeat center center/cover;
@@ -247,7 +260,7 @@
                     <li><a href="contact.html">contact</a></li>
                 </ul>
             </nav>
-            <a href="login.html" class="login-button">login</a> <!-- Redirects to login.html -->
+            <a href="#" class="login-button" onclick="toggleLogin()">login</a> <!-- Opens login section -->
         </div>
     </header>
 
@@ -296,10 +309,46 @@
         </div>
     </section>
 
+    <!-- Login Section -->
+    <div class="login-section" id="login-section">
+        <h2>login</h2>
+        <div id="error-message" style="color: red;"></div>
+        <form id="login-form">
+            <label for="username">username</label>
+            <input type="text" id="username" required>
+            <label for="password">password</label>
+            <input type="password" id="password" required>
+            <button type="submit">log in</button>
+        </form>
+    </div>
+
     <footer>
         <div class="container">
             <p>&copy; 2024 indi's shop. all rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const validUsername = 'user'; // Replace with your valid username
+        const validPassword = 'password'; // Replace with your valid password
+
+        document.getElementById('login-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === validUsername && password === validPassword) {
+                window.location.href = 'home.html'; // Redirect to home page
+            } else {
+                document.getElementById('error-message').innerText = 'Invalid username or password.';
+            }
+        });
+
+        function toggleLogin() {
+            const loginSection = document.getElementById('login-section');
+            loginSection.style.display = loginSection.style.display === 'block' ? 'none' : 'block';
+        }
+    </script>
 </body>
 </html>
