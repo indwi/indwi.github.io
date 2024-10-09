@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,66 +6,232 @@
     <title>indi's shop</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Add your existing styles here ... */
-
-        /* Chatbot styles */
-        .chat-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 300px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-            display: none; /* Hidden by default */
-            flex-direction: column;
+        /* Reset some default styles */
+        body, h1, h2, p, ul, li, a {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .chat-header {
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            color: #4A4A4A; /* Dark gray for text */
+            line-height: 1.6;
+            background-color: #FFFFFF; /* White background */
+        }
+
+        /* Header styling */
+        header {
             background-color: #FFC0CB; /* Soft Pink */
             color: #fff;
-            padding: 10px;
+            padding: 1rem 0;
+        }
+
+        header .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: pointer;
         }
 
-        .chat-box {
-            padding: 10px;
-            height: 200px;
-            overflow-y: auto;
-            border-top: 1px solid #ddd;
+        header h1 {
+            font-size: 2rem;
+        }
+
+        header nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        header nav ul li {
+            margin: 0 1rem;
+        }
+
+        header nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+        }
+
+        header nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Login button styling */
+        .login-button {
+            background-color: #FFB6C1; /* Light pink */
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            text-transform: lowercase; /* Lowercase text */
+        }
+
+        .login-button:hover {
+            background-color: #ffb0be; /* Hot pink */
+        }
+
+        /* Hero section styling */
+        .hero {
+            background: url('hero-bg.jpg') no-repeat center center/cover;
+            color: #4A4A4A; /* Dark gray for text */
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero .btn {
+            background-color: #FFC0CB; /* Soft Pink */
+            color: #fff;
+            padding: 0.75rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .hero .btn:hover {
+            background-color: #ffb0be; /* Darker Mint Green for hover */
+        }
+
+        /* About section styling */
+        .about {
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .about .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .about p {
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* Gallery section styling */
+        .gallery {
+            padding: 2rem 1rem;
+            background-color: #f4f4f4; /* Light gray */
+        }
+
+        .gallery .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact section styling */
+        .contact {
+            padding: 2rem 1rem;
+            background-color: #fff;
+        }
+
+        .contact .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact form {
             display: flex;
             flex-direction: column;
         }
 
-        .chat-message {
-            margin: 5px 0;
+        .contact label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
         }
 
-        .chat-message.user {
-            text-align: right;
+        .contact input, .contact textarea {
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease; /* Smooth transition */
         }
 
-        input[type="text"] {
-            padding: 10px;
+        .contact input:focus, .contact textarea:focus {
+            border-color: #FFC0CB; /* Highlight color set to pink */
+            outline: none; /* Remove default outline */
+        }
+
+        .contact button {
+            background-color: #FFC0CB; /* Soft Pink for button */
+            color: #fff;
+            padding: 0.75rem;
             border: none;
-            border-top: 1px solid #ddd;
-            width: calc(100% - 50px); /* Adjust for button */
-            margin-right: 5px;
-        }
-
-        button {
-            padding: 10px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
+            border-radius: 5px;
+            font-size: 1rem;
             cursor: pointer;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .contact button:hover {
+            background-color: #FFB6C1; /* Lighter Pink for hover */
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #FFC0CB; /* Soft Pink */
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -81,7 +247,7 @@
                     <li><a href="contact.html">contact</a></li>
                 </ul>
             </nav>
-            <a href="login.html" class="login-button">login</a>
+            <a href="login.html" class="login-button">login</a> <!-- Redirects to login.html -->
         </div>
     </header>
 
@@ -93,73 +259,47 @@
         </div>
     </section>
 
-    <!-- Other sections... -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>about us</h2>
+            <p>welcome to indi's shop, where we specialize in providing the most beautiful and fresh flowers for every occasion. our passion for flowers and attention to detail ensures that every bouquet is crafted with love.</p>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2>gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="file.jpg" alt="Flower 1"></div>
+                <div class="gallery-item"><img src="flower2.jpg" alt="Flower 2"></div>
+                <div class="gallery-item"><img src="flower3.jpg" alt="Flower 3"></div>
+                <!-- Add more items as needed -->
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>contact us</h2>
+            <form action="smtp_mailer.php" method="post">
+                <label for="name">name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">email</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">message</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit" class="btn">send message</button>
+            </form>
+        </div>
+    </section>
 
     <footer>
         <div class="container">
             <p>&copy; 2024 indi's shop. all rights reserved.</p>
         </div>
     </footer>
-
-    <!-- Chatbot Container -->
-    <div class="chat-container" id="chat-container">
-        <div class="chat-header" id="chat-header">
-            <span>Chat with us!</span>
-            <span id="chat-toggle">+</span>
-        </div>
-        <div class="chat-box" id="chat-box">
-            <div class="chat-message bot">Hello! I'm your chatbot. How can I assist you today?</div>
-        </div>
-        <div>
-            <input type="text" id="user-input" placeholder="Type your message...">
-            <button id="send-button">Send</button>
-        </div>
-    </div>
-
-    <script>
-        // Toggle chat visibility
-        document.getElementById("chat-header").addEventListener("click", function() {
-            const chatContainer = document.getElementById("chat-container");
-            chatContainer.style.display = chatContainer.style.display === "none" ? "flex" : "none";
-            document.getElementById("chat-toggle").textContent = chatContainer.style.display === "flex" ? "−" : "+";
-        });
-
-        // Send button event listener
-        document.getElementById("send-button").addEventListener("click", function() {
-            const userInput = document.getElementById("user-input");
-            const userMessage = userInput.value.trim();
-
-            if (userMessage) {
-                addMessage(userMessage, 'user');
-                userInput.value = '';
-
-                // Simulate bot response
-                setTimeout(() => {
-                    const botResponse = getBotResponse(userMessage);
-                    addMessage(botResponse, 'bot');
-                }, 500);
-            }
-        });
-
-        function addMessage(message, sender) {
-            const chatBox = document.getElementById("chat-box");
-            const messageElement = document.createElement("div");
-            messageElement.classList.add("chat-message", sender);
-            messageElement.textContent = message;
-            chatBox.appendChild(messageElement);
-            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
-        }
-
-        function getBotResponse(message) {
-            const responses = {
-                "hello": "Hi there! How can I help?",
-                "how are you?": "I'm just a program, but thanks for asking!",
-                "bye": "Goodbye! Have a great day!",
-                "default": "I'm not sure how to respond to that."
-            };
-
-            return responses[message.toLowerCase()] || responses["default"];
-        }
-    </script>
 </body>
 </html>
