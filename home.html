@@ -222,6 +222,66 @@
             background-color: #FFB6C1; /* Lighter Pink for hover */
         }
 
+        /* Chatbot styles */
+        .chat-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: none; /* Hidden by default */
+            flex-direction: column;
+        }
+
+        .chat-header {
+            background-color: #FFC0CB; /* Soft Pink */
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .chat-box {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid #ddd;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-message {
+            margin: 5px 0;
+        }
+
+        .chat-message.user {
+            text-align: right;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #ddd;
+            width: calc(100% - 50px); /* Adjust for button */
+            margin-right: 5px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
         /* Footer styling */
         footer {
             background-color: #FFC0CB; /* Soft Pink */
@@ -301,5 +361,66 @@
             <p>&copy; 2024 indi's shop. all rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Chatbot Container -->
+    <div class="chat-container" id="chat-container">
+        <div class="chat-header" id="chat-header">
+            <span>Chat with us!</span>
+            <span id="chat-toggle">−</span>
+        </div>
+        <div class="chat-box" id="chat-box">
+            <div class="chat-message bot">Hello! I'm your chatbot. How can I assist you today?</div>
+        </div>
+        <div>
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle chat visibility
+        document.getElementById("chat-header").addEventListener("click", function() {
+            const chatContainer = document.getElementById("chat-container");
+            chatContainer.style.display = chatContainer.style.display === "none" ? "flex" : "none";
+            document.getElementById("chat-toggle").textContent = chatContainer.style.display === "flex" ? "−" : "+";
+        });
+
+        // Send button event listener
+        document.getElementById("send-button").addEventListener("click", function() {
+            const userInput = document.getElementById("user-input");
+            const userMessage = userInput.value.trim();
+
+            if (userMessage) {
+                addMessage(userMessage, 'user');
+                userInput.value = '';
+
+                // Simulate bot response
+                setTimeout(() => {
+                    const botResponse = getBotResponse(userMessage);
+                    addMessage(botResponse, 'bot');
+                }, 500);
+            }
+        });
+
+        function addMessage(message, sender) {
+            const chatBox = document.getElementById("chat-box");
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("chat-message", sender);
+            messageElement.textContent = message;
+            chatBox.appendChild(messageElement);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+        }
+
+        function getBotResponse(message) {
+            const responses = {
+                "hello": "Hi there! How can I help?",
+                "how are you?": "I'm just a program, but thanks for asking!",
+                "bye": "Goodbye! Have a great day!",
+                "default": "I'm not sure how to respond to that."
+            };
+
+            return responses[message.toLowerCase()] || responses["default"];
+        }
+    </script>
 </body>
 </html>
