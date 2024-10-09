@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Indi</title>
+    <title>indi's shop - about</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         /* Reset some default styles */
@@ -16,16 +16,25 @@
         /* Basic styling for the body */
         body {
             font-family: Arial, sans-serif;
-            color: #333;
+            color: #4A4A4A; /* Dark gray for text */
             line-height: 1.6;
-            background-color: #f9f9f9;
+            background-color: #FFFFFF; /* White background */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Full height */
+            align-items: center; /* Center content */
+            justify-content: center; /* Center content vertically */
         }
 
         /* Header styling */
         header {
-            background-color: #6a5acd;
+            background-color: #FFC0CB; /* Soft Pink */
             color: #fff;
             padding: 1rem 0;
+            width: 100%;
+            position: absolute; /* Fixed position */
+            top: 0;
+            z-index: 1; /* Ensure it's on top */
         }
 
         header .container {
@@ -62,42 +71,53 @@
 
         /* About section styling */
         .about {
-            padding: 4rem 1rem;
+            padding: 3rem 1rem; /* Increased padding */
             background-color: #fff;
-            text-align: center;
-        }
-
-        .about .container {
-            max-width: 800px;
-            margin: 0 auto;
+            max-width: 800px; /* Larger width */
+            margin: 2rem auto;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center; /* Center text */
         }
 
         .about h2 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 1rem;
-            color: #6a5acd;
         }
 
         .about p {
-            font-size: 1.2rem;
-            line-height: 1.5;
-            color: #555;
+            font-size: 1rem;
+            margin-bottom: 1rem;
         }
 
-        .about img {
-            margin-top: 2rem;
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
+        .photo-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* Center photos */
+            margin-top: 1rem;
+        }
+
+        .photo-item {
+            width: calc(33.333% - 1rem); /* Three photos per row */
+            margin: 0.5rem;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
         /* Footer styling */
         footer {
-            background-color: #6a5acd;
+            background-color: #FFC0CB; /* Soft Pink */
             color: #fff;
             padding: 1rem 0;
             text-align: center;
+            width: 100%; /* Full width */
+            position: absolute; /* Fixed position */
+            bottom: 0;
         }
 
         footer p {
@@ -108,31 +128,42 @@
 <body>
     <header>
         <div class="container">
-            <h1>About Indi</h1>
+            <h1>indi's shop</h1>
             <nav>
                 <ul>
-                    <li><a href="home.html">Home</a></li>
-                    <li><a href="about.html">About Me</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="home.html">home</a></li>
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="gallery.html">gallery</a></li>
+                    <li><a href="contact.html">contact</a></li>
                 </ul>
             </nav>
+            <a href="login.html" class="login-button">login</a>
         </div>
     </header>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2>Hello, I'm Indi</h2>
-            <p>Welcome to my personal website! I'm passionate about storytelling, and I love to explore different cultures, especially the rich traditions of the Aboriginal people. My work often reflects my deep interest in these themes, with a focus on vivid descriptions and sensory details that bring my stories to life.</p>
-            <img src="indi.jpg" alt="Photo of Indi">
+    <section class="about">
+        <h2>about us</h2>
+        <p>welcome to indi's shop, where we specialize in providing the most beautiful and fresh flowers for every occasion.</p>
+        <p>our passion for flowers and attention to detail ensures that every bouquet is crafted with love.</p>
+        
+        <div class="photo-gallery">
+            <div class="photo-item">
+                <img src="flower1.jpg" alt="Flower 1">
+            </div>
+            <div class="photo-item">
+                <img src="flower2.jpg" alt="Flower 2">
+            </div>
+            <div class="photo-item">
+                <img src="flower3.jpg" alt="Flower 3">
+            </div>
+            <!-- Add more photo items as needed -->
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2024 Indi. All rights reserved.</p>
+            <p>&copy; 2024 indi's shop. all rights reserved.</p>
         </div>
     </footer>
 </body>
 </html>
-
