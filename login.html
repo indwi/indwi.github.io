@@ -22,6 +22,8 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh; /* Full height */
+            align-items: center; /* Center content */
+            justify-content: center; /* Center content vertically */
         }
 
         /* Header styling */
@@ -29,6 +31,10 @@
             background-color: #FFC0CB; /* Soft Pink */
             color: #fff;
             padding: 1rem 0;
+            width: 100%;
+            position: absolute; /* Fixed position */
+            top: 0;
+            z-index: 1; /* Ensure it's on top */
         }
 
         header .container {
@@ -65,19 +71,18 @@
 
         /* Login form styling */
         .login {
-            padding: 2rem 1rem;
+            padding: 3rem 1rem; /* Increased padding */
             background-color: #fff;
-            max-width: 400px;
+            max-width: 500px; /* Larger width */
             margin: 2rem auto;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            flex-grow: 1; /* Allow it to grow */
+            text-align: center; /* Center text */
         }
 
         .login h2 {
             font-size: 2rem;
             margin-bottom: 1rem;
-            text-align: center;
         }
 
         .login label {
@@ -108,6 +113,7 @@
             font-size: 1rem;
             cursor: pointer;
             width: 100%; /* Full width */
+            margin-bottom: 1rem; /* Space below */
         }
 
         .login button:hover {
@@ -124,12 +130,18 @@
             font-size: 1rem;
             cursor: pointer;
             width: 100%; /* Full width */
-            margin-top: 1rem; /* Space above */
             text-transform: lowercase; /* Lowercase text */
         }
 
         .signup-button:hover {
             background-color: #FFB6C1; /* Lighter Pink for hover */
+        }
+
+        /* Additional text styling */
+        .signup-text {
+            margin-top: 1rem; /* Space above */
+            font-size: 1rem;
+            color: #4A4A4A; /* Dark gray */
         }
 
         /* Footer styling */
@@ -138,6 +150,9 @@
             color: #fff;
             padding: 1rem 0;
             text-align: center;
+            width: 100%; /* Full width */
+            position: absolute; /* Fixed position */
+            bottom: 0;
         }
 
         footer p {
@@ -171,8 +186,9 @@
             <input type="password" id="password" name="password" required>
 
             <button type="submit">log in</button>
-            <a href="signup.html" class="signup-button">sign up</a> <!-- Sign Up Button -->
         </form>
+        <p class="signup-text">Need an account? Sign up here</p>
+        <a href="signup.html" class="signup-button">sign up</a> <!-- Sign Up Button -->
     </section>
 
     <footer>
