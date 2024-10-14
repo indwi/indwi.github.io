@@ -3,251 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bamboo Bliss - Luxury Skincare</title>
+    <title>Bamboo Skincare</title>
     <style>
-        /* Global styles */
-        body {
-            font-family: 'Arial', sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            background-color: #f9f9f9; /* Light background */
-            color: #333;
+            padding: 0;
         }
 
-        /* Header styles */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
         header {
-            background-color: #5cbf85; /* Modern green */
+            background: #2a924b;
             color: white;
-            padding: 1rem 2rem;
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 20px 0;
         }
 
         header h1 {
-            font-size: 2rem;
-            letter-spacing: 1px;
+            text-align: center;
         }
 
         nav ul {
             list-style: none;
             display: flex;
-            gap: 2rem;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 20px;
         }
 
         nav ul li a {
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #3a8e63; /* Darker green */
-        }
-
-        /* Hero section */
         .hero {
-            background: url('bamboo-bg.jpg') no-repeat center center/cover;
+            background: url('https://via.placeholder.com/1920x600') no-repeat center center/cover;
             color: white;
+            padding: 100px 0;
             text-align: center;
-            padding: 150px 1rem;
-            position: relative;
-            margin-top: 60px; /* Offset for fixed header */
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Overlay */
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h2 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .hero .btn {
-            background-color: #5cbf85;
-            padding: 1rem 2rem;
-            border-radius: 25px;
+        .btn {
+            background: #fff;
+            color: #2a924b;
+            padding: 10px 20px;
             text-decoration: none;
-            font-weight: bold;
-            transition: background 0.3s;
+            border-radius: 5px;
         }
 
-        .hero .btn:hover {
-            background-color: #3a8e63; /* Darker green */
-        }
-
-        /* Section styles */
         section {
-            padding: 80px 1rem;
-            text-align: center;
+            padding: 40px 0;
         }
 
-        section h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        section p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Gallery styles */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1rem;
-            padding: 1rem;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Contact form styles */
-        .contact form {
+        .product-grid {
             display: flex;
-            flex-direction: column;
-            max-width: 600px;
-            margin: 0 auto;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
-        .contact label {
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .contact input, .contact textarea {
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 2px solid #5cbf85; /* Green border */
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        .contact input:focus, .contact textarea:focus {
-            border-color: #3a8e63; /* Darker green focus */
-            outline: none;
-        }
-
-        .contact button {
-            background-color: #5cbf85;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .contact button:hover {
-            background-color: #3a8e63; /* Darker green on hover */
-        }
-
-        /* Footer styles */
-        footer {
-            background-color: #5cbf85; /* Modern green */
-            color: white;
-            padding: 1rem 0;
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
             text-align: center;
+            margin: 20px;
+            width: 200px;
+        }
+
+        footer {
+            background: #2a924b;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .social-media a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bamboo Bliss</h1>
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <h1>Bamboo Bliss</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>Luxury Skincare Inspired by Nature</h2>
-            <p>Discover our bamboo-infused skincare products for radiant, healthy skin.</p>
-            <a href="#gallery" class="btn">Shop Now</a>
+    <section class="hero">
+        <div class="container">
+            <h2>Nature's Best for Your Skin</h2>
+            <p>Discover our range of bamboo-based skincare products.</p>
+            <a href="#products" class="btn">Shop Now</a>
         </div>
     </section>
 
     <section id="about">
-        <h2>About Us</h2>
-        <p>At Bamboo Bliss, we believe in the power of nature. Our products harness the nourishing properties of bamboo to deliver exceptional skincare solutions, combining luxury with sustainability.</p>
-    </section>
-
-    <section id="gallery">
-        <h2>Gallery</h2>
-        <div class="gallery">
-            <div class="gallery-item"><img src="bamboo1.jpg" alt="Bamboo Product 1"></div>
-            <div class="gallery-item"><img src="bamboo2.jpg" alt="Bamboo Product 2"></div>
-            <div class="gallery-item"><img src="bamboo3.jpg" alt="Bamboo Product 3"></div>
-            <!-- Add more items as needed -->
+        <div class="container">
+            <h2>About Us</h2>
+            <p>At Bamboo Bliss, we believe in harnessing the power of nature. Our bamboo skincare line is eco-friendly, cruelty-free, and designed to nourish your skin with the best ingredients nature has to offer.</p>
         </div>
     </section>
 
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form action="smtp_mailer.php" method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-
-            <label for="message">Message</label>
-            <textarea id="message" name="message" rows="4" required></textarea>
-
-            <button type="submit">Send Message</button>
-        </form>
+    <section id="products">
+        <div class="container">
+            <h2>Our Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250" alt="Bamboo Moisturizer">
+                    <h3>Bamboo Moisturizer</h3>
+                    <p>Hydrate and nourish your skin.</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250" alt="Bamboo Cleanser">
+                    <h3>Bamboo Cleanser</h3>
+                    <p>Gently cleanse and refresh.</p>
+                </div>
+                <div class="product-card">
+                    <img src="https://via.placeholder.com/250" alt="Bamboo Scrub">
+                    <h3>Bamboo Scrub</h3>
+                    <p>Exfoliate and rejuvenate.</p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 Bamboo Bliss. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2023 Bamboo Bliss. All Rights Reserved.</p>
+            <div class="social-media">
+                <a href="#">Facebook</a>
+                <a href="#">Instagram</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
+        // This is where you can add JavaScript code for interactivity
+        console.log("Welcome to Bamboo Bliss!"); // Example console log
     </script>
 </body>
 </html>
