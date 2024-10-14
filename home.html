@@ -5,37 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bamboo Bliss - Natural Skincare</title>
     <style>
-        /* Reset some default styles */
+        /* Reset default styles */
         body, h1, h2, p, ul, li, a {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Basic styling for the body */
+        /* Body styling */
         body {
             font-family: 'Arial', sans-serif;
+            background-color: #eafaf0; /* Light green background */
             color: #333; /* Dark gray for text */
             line-height: 1.6;
-            background-color: #f0f8f0; /* Light green background */
         }
 
         /* Header styling */
         header {
-            background-color: #b2e0b2; /* Light Green */
-            color: #fff;
+            background-color: #a8e0a3; /* Bright light green */
             padding: 1rem 0;
-            position: relative;
-            z-index: 2;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
         }
 
         header .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
 
         header h1 {
@@ -49,41 +49,26 @@
         }
 
         header nav ul li {
-            margin: 0 1rem;
+            margin: 0 1.5rem;
         }
 
         header nav ul li a {
             color: #fff;
             text-decoration: none;
-            font-size: 1rem;
+            font-size: 1.1rem;
+            transition: color 0.3s;
         }
 
         header nav ul li a:hover {
-            text-decoration: underline;
+            color: #3c763d; /* Darker green */
         }
 
-        /* Login button styling */
-        .login-button {
-            background-color: #b2e0b2; /* Light green */
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 1rem;
-        }
-
-        .login-button:hover {
-            background-color: #a0d8a0; /* Darker green */
-        }
-
-        /* Hero section styling */
+        /* Hero section */
         .hero {
             background: url('bamboo-bg.jpg') no-repeat center center/cover;
             color: #fff;
             text-align: center;
-            padding: 6rem 1rem;
+            padding: 100px 1rem; /* Increased padding for better visual */
             position: relative;
             overflow: hidden;
         }
@@ -95,154 +80,125 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay */
-            z-index: 1;
+            background: rgba(0, 0, 0, 0.4); /* Dark overlay for readability */
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
+            z-index: 1;
             max-width: 600px;
             margin: 0 auto;
         }
 
         .hero h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
             font-family: 'Georgia', serif;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 2rem;
         }
 
         .hero .btn {
-            background-color: #b2e0b2; /* Light Green */
+            background-color: #a8e0a3; /* Bright light green */
             color: #fff;
             padding: 0.75rem 2rem;
-            text-decoration: none;
             border-radius: 5px;
             transition: background 0.3s;
+            text-decoration: none;
+            font-weight: bold;
         }
 
         .hero .btn:hover {
-            background-color: #a0d8a0; /* Darker green for hover */
+            background-color: #87c48f; /* Darker green for hover */
         }
 
-        /* About section styling */
-        .about {
-            padding: 2rem 1rem;
-            background-color: #fff;
+        /* Section styling */
+        section {
+            padding: 60px 1rem;
+            text-align: center;
         }
 
-        .about .container {
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        section p {
+            font-size: 1.2rem;
             max-width: 800px;
             margin: 0 auto;
         }
 
-        .about h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .about p {
-            font-size: 1.2rem;
-            line-height: 1.5;
-        }
-
-        /* Gallery section styling */
+        /* Gallery section */
         .gallery {
-            padding: 2rem 1rem;
-            background-color: #f4f4f4; /* Light gray */
-        }
-
-        .gallery .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
+            background-color: #f9f9f9; /* Light background for gallery */
         }
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
             gap: 1rem;
+            padding: 1rem;
         }
 
         .gallery-item img {
             width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
+            border-radius: 10px;
+            transition: transform 0.3s;
         }
 
         .gallery-item img:hover {
             transform: scale(1.05);
         }
 
-        /* Contact section styling */
-        .contact {
-            padding: 2rem 1rem;
-            background-color: #fff;
-        }
-
-        .contact .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
+        /* Contact form styling */
         .contact form {
             display: flex;
             flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .contact label {
-            font-size: 1rem;
             margin-bottom: 0.5rem;
+            font-weight: bold;
         }
 
         .contact input, .contact textarea {
             padding: 0.75rem;
             margin-bottom: 1rem;
-            border: 1px solid #ddd;
+            border: 2px solid #a8e0a3; /* Green border */
             border-radius: 5px;
             font-size: 1rem;
-            transition: border-color 0.3s ease; /* Smooth transition */
+            transition: border-color 0.3s;
         }
 
         .contact input:focus, .contact textarea:focus {
-            border-color: #b2e0b2; /* Highlight color set to light green */
-            outline: none; /* Remove default outline */
+            border-color: #87c48f; /* Darker green focus */
+            outline: none;
         }
 
         .contact button {
-            background-color: #b2e0b2; /* Light Green for button */
+            background-color: #a8e0a3; /* Bright light green */
             color: #fff;
             padding: 0.75rem;
             border: none;
             border-radius: 5px;
             font-size: 1rem;
             cursor: pointer;
+            transition: background 0.3s;
         }
 
         .contact button:hover {
-            background-color: #a0d8a0; /* Darker Green for hover */
+            background-color: #87c48f; /* Darker green on hover */
         }
 
         /* Footer styling */
         footer {
-            background-color: #b2e0b2; /* Light Green */
+            background-color: #a8e0a3; /* Bright light green */
             color: #fff;
             padding: 1rem 0;
             text-align: center;
@@ -265,7 +221,6 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
-            <a href="login.html" class="login-button">Login</a>
         </div>
     </header>
 
@@ -277,47 +232,39 @@
         </div>
     </section>
 
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Welcome to Bamboo Bliss, where we harness the natural benefits of bamboo in our skincare products. Our mission is to provide you with high-quality, eco-friendly skincare solutions that promote healthy, glowing skin.</p>
-        </div>
+    <section id="about">
+        <h2>About Us</h2>
+        <p>Welcome to Bamboo Bliss, where we harness the natural benefits of bamboo in our skincare products. Our mission is to provide you with high-quality, eco-friendly skincare solutions that promote healthy, glowing skin.</p>
     </section>
 
     <section id="gallery" class="gallery">
-        <div class="container">
-            <h2>Gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="bamboo1.jpg" alt="Bamboo Product 1"></div>
-                <div class="gallery-item"><img src="bamboo2.jpg" alt="Bamboo Product 2"></div>
-                <div class="gallery-item"><img src="bamboo3.jpg" alt="Bamboo Product 3"></div>
-                <!-- Add more items as needed -->
-            </div>
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item"><img src="bamboo1.jpg" alt="Bamboo Product 1"></div>
+            <div class="gallery-item"><img src="bamboo2.jpg" alt="Bamboo Product 2"></div>
+            <div class="gallery-item"><img src="bamboo3.jpg" alt="Bamboo Product 3"></div>
+            <!-- Add more items as needed -->
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <form action="smtp_mailer.php" method="post">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form action="smtp_mailer.php" method="post">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
 
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
 
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" required></textarea>
 
-                <button type="submit" class="btn">Send Message</button>
-            </form>
-        </div>
+            <button type="submit">Send Message</button>
+        </form>
     </section>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 Bamboo Bliss. All rights reserved.</p>
-        </div>
+        <p>&copy; 2024 Bamboo Bliss. All rights reserved.</p>
     </footer>
 
     <script>
