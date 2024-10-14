@@ -1,305 +1,191 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>indi's shop</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Unique Skincare Brand</title>
     <style>
-        /* Reset some default styles */
-        body, h1, h2, p, ul, li, a {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Basic styling for the body */
         body {
             font-family: Arial, sans-serif;
-            color: #4A4A4A; /* Dark gray for text */
             line-height: 1.6;
-            background-color: #FFFFFF; /* White background */
+            background-color: #f4f4f4;
         }
 
-        /* Header styling */
         header {
-            background-color: #FFC0CB; /* Soft Pink */
+            background: #333;
             color: #fff;
-            padding: 1rem 0;
+            padding: 20px 0;
         }
 
-        header .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+        nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 0 20px;
         }
 
-        header h1 {
-            font-size: 2rem;
-        }
-
-        header nav ul {
+        nav ul {
             list-style: none;
             display: flex;
         }
 
-        header nav ul li {
-            margin: 0 1rem;
+        nav ul li {
+            margin-left: 20px;
         }
 
-        header nav ul li a {
+        nav a {
             color: #fff;
             text-decoration: none;
-            font-size: 1rem;
         }
 
-        header nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        /* Login button styling */
-        .login-button {
-            background-color: #FFB6C1; /* Light pink */
-            color: #fff;
-            padding: 0.5rem 1rem;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-size: 1rem;
-            text-transform: lowercase; /* Lowercase text */
-        }
-
-        .login-button:hover {
-            background-color: #ffb0be; /* Hot pink */
-        }
-
-        /* Hero section styling */
         .hero {
-            background: url('hero-bg.jpg') no-repeat center center/cover;
-            color: #4A4A4A; /* Dark gray for text */
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 100px 20px;
+            background: url('images/hero.jpg') no-repeat center center/cover;
+            color: #fff;
         }
 
-        .hero-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .hero h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+        .hero h1 {
+            font-size: 3em;
         }
 
         .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
+            margin: 20px 0;
         }
 
-        .hero .btn {
-            background-color: #FFC0CB; /* Soft Pink */
+        .btn {
+            background: #e84a5f;
             color: #fff;
-            padding: 0.75rem 2rem;
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
         }
 
-        .hero .btn:hover {
-            background-color: #ffb0be; /* Darker Mint Green for hover */
+        main {
+            padding: 20px;
         }
 
-        /* About section styling */
-        .about {
-            padding: 2rem 1rem;
-            background-color: #fff;
-        }
-
-        .about .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .about h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .about p {
-            font-size: 1.2rem;
-            line-height: 1.5;
-        }
-
-        /* Gallery section styling */
-        .gallery {
-            padding: 2rem 1rem;
-            background-color: #f4f4f4; /* Light gray */
-        }
-
-        .gallery .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .gallery h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item img:hover {
-            transform: scale(1.05);
-        }
-
-        /* Contact section styling */
-        .contact {
-            padding: 2rem 1rem;
-            background-color: #fff;
-        }
-
-        .contact .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact h2 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact form {
+        .product-container {
             display: flex;
-            flex-direction: column;
+            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
-        .contact label {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .contact input, .contact textarea {
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease; /* Smooth transition */
-        }
-
-        .contact input:focus, .contact textarea:focus {
-            border-color: #FFC0CB; /* Highlight color set to pink */
-            outline: none; /* Remove default outline */
-        }
-
-        .contact button {
-            background-color: #FFC0CB; /* Soft Pink for button */
-            color: #fff;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .contact button:hover {
-            background-color: #FFB6C1; /* Lighter Pink for hover */
-        }
-
-        /* Footer styling */
-        footer {
-            background-color: #FFC0CB; /* Soft Pink */
-            color: #fff;
-            padding: 1rem 0;
+        .product {
+            background: #fff;
+            margin: 10px;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
 
-        footer p {
-            font-size: 0.9rem;
+        .product img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .socials {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+
+        .socials li {
+            margin: 0 10px;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container">
-            <h1>indi's shop</h1>
-            <nav>
-                <ul>
-                    <li><a href="home.html">home</a></li>
-                    <li><a href="about.html">about</a></li>
-                    <li><a href="gallery.html">gallery</a></li>
-                    <li><a href="contact.html">contact</a></li>
-                </ul>
-            </nav>
-            <a href="login.html" class="login-button">login</a> <!-- Redirects to login.html -->
+        <nav>
+            <div class="logo">Skincare Brand</div>
+            <ul>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="hero">
+            <h1>Glow Naturally</h1>
+            <p>Your skin deserves the best.</p>
+            <a href="#products" class="btn">Shop Now</a>
         </div>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h2>where flowers bloom, so does hope</h2>
-            <p>find the perfect bouquet for any occasion.</p>
-            <a href="#gallery" class="btn">shop now</a>
-        </div>
-    </section>
-
-    <section id="about" class="about">
-        <div class="container">
-            <h2>about us</h2>
-            <p>welcome to indi's shop, where we specialize in providing the most beautiful and fresh flowers for every occasion. our passion for flowers and attention to detail ensures that every bouquet is crafted with love.</p>
-        </div>
-    </section>
-
-    <section id="gallery" class="gallery">
-        <div class="container">
-            <h2>gallery</h2>
-            <div class="gallery-grid">
-                <div class="gallery-item"><img src="file.jpg" alt="Flower 1"></div>
-                <div class="gallery-item"><img src="flower2.jpg" alt="Flower 2"></div>
-                <div class="gallery-item"><img src="flower3.jpg" alt="Flower 3"></div>
-                <!-- Add more items as needed -->
+    <main>
+        <section id="products">
+            <h2>Our Products</h2>
+            <div class="product-container">
+                <div class="product">
+                    <img src="images/product1.jpg" alt="Product 1">
+                    <h3>Hydrating Cream</h3>
+                    <p>$29.99</p>
+                </div>
+                <div class="product">
+                    <img src="images/product2.jpg" alt="Product 2">
+                    <h3>Brightening Serum</h3>
+                    <p>$39.99</p>
+                </div>
+                <div class="product">
+                    <img src="images/product3.jpg" alt="Product 3">
+                    <h3>Rejuvenating Mask</h3>
+                    <p>$24.99</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>contact us</h2>
-            <form action="smtp_mailer.php" method="post">
-                <label for="name">name</label>
-                <input type="text" id="name" name="name" required>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We believe in using nature's best ingredients to nurture your skin. Our products are formulated with care and love.</p>
+        </section>
 
-                <label for="email">email</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="message">message</label>
-                <textarea id="message" name="message" rows="4" required></textarea>
-
-                <button type="submit" class="btn">send message</button>
-            </form>
-        </div>
-    </section>
+        <section id="testimonials">
+            <h2>What Our Customers Say</h2>
+            <blockquote>
+                <p>"I've never felt my skin so healthy!" - Sarah K.</p>
+            </blockquote>
+            <blockquote>
+                <p>"These products are a game-changer!" - John D.</p>
+            </blockquote>
+        </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; 2024 indi's shop. all rights reserved.</p>
+        <div class="footer-content">
+            <p>&copy; 2024 Unique Skincare Brand. All Rights Reserved.</p>
+            <ul class="socials">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">Twitter</a></li>
+            </ul>
         </div>
     </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
