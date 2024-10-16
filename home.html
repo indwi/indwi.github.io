@@ -7,20 +7,27 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #e0f7fa; /* Light cyan */
-            color: #004d40; /* Dark teal */
+            font-family: 'Arial', sans-serif;
+            background: #f0f4f8; /* Light background */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
-        
+
         header {
             background: #00796b; /* Dark teal */
             color: white;
             padding: 20px;
             text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         nav {
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
         nav a {
@@ -28,13 +35,43 @@
             margin: 0 15px;
             text-decoration: none;
             font-weight: bold;
+            transition: color 0.3s;
         }
 
         nav a:hover {
-            text-decoration: underline;
+            color: #ffcc80; /* Light orange on hover */
+        }
+
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?technology') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
+            z-index: 1;
+        }
+
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2;
         }
 
         .container {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -49,6 +86,31 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
             padding: 20px;
+            transition: transform 0.3s;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        .card {
+            background: #e0f7fa; /* Light cyan */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
         }
 
         footer {
@@ -56,15 +118,27 @@
             padding: 20px;
             background: #00796b;
             color: white;
-            position: relative;
-            bottom: 0;
             width: 100%;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            nav a {
+                margin: 0 10px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to My Advanced Website</h1>
+        <h1>My Advanced Website</h1>
         <nav>
             <a href="#about">About</a>
             <a href="#services">Services</a>
@@ -72,19 +146,37 @@
         </nav>
     </header>
 
+    <div class="hero">
+        <h1>Welcome to Our World</h1>
+        <p>Creating exceptional web experiences</p>
+    </div>
+
     <div class="container">
         <div class="section" id="about">
             <h2>About Us</h2>
-            <p>We are a team dedicated to creating amazing web experiences.</p>
+            <p>We are a dedicated team passionate about building innovative web solutions.</p>
         </div>
 
         <div class="section" id="services">
             <h2>Our Services</h2>
-            <ul>
-                <li>Web Development</li>
-                <li>Design Services</li>
-                <li>SEO Optimization</li>
-            </ul>
+            <div class="grid">
+                <div class="card">
+                    <h3>Web Development</h3>
+                    <p>Building responsive and dynamic websites.</p>
+                </div>
+                <div class="card">
+                    <h3>Design Services</h3>
+                    <p>Creating visually appealing designs.</p>
+                </div>
+                <div class="card">
+                    <h3>SEO Optimization</h3>
+                    <p>Improving your website's visibility on search engines.</p>
+                </div>
+                <div class="card">
+                    <h3>Content Creation</h3>
+                    <p>Crafting engaging content to attract your audience.</p>
+                </div>
+            </div>
         </div>
 
         <div class="section" id="contact">
