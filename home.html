@@ -3,78 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bubble Inspired Website</title>
+    <title>My Advanced Website</title>
     <style>
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #e0f7fa; /* Light cyan background */
-            color: #00796b; /* Dark teal text */
+            background: #e0f7fa; /* Light cyan */
+            color: #004d40; /* Dark teal */
+        }
+        
+        header {
+            background: #00796b; /* Dark teal */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            margin: 20px 0;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            height: 100vh;
-            overflow: hidden;
+            padding: 20px;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        .section {
+            width: 80%;
+            max-width: 800px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+            padding: 20px;
         }
 
-        .bubble {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            position: absolute;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0); }
-        }
-
-        button {
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #00796b; /* Dark teal button */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #00796b;
             color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #004d40; /* Darker teal on hover */
+            position: relative;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Welcome to My Advanced Website</h1>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
     <div class="container">
-        <h1>Welcome to Bubble Land</h1>
-        <button onclick="addBubble()">Add a Bubble!</button>
+        <div class="section" id="about">
+            <h2>About Us</h2>
+            <p>We are a team dedicated to creating amazing web experiences.</p>
+        </div>
+
+        <div class="section" id="services">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Web Development</li>
+                <li>Design Services</li>
+                <li>SEO Optimization</li>
+            </ul>
+        </div>
+
+        <div class="section" id="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <label for="name">Name:</label>
+                <input type="text" id="name" required><br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required><br><br>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </div>
 
-    <script>
-        function addBubble() {
-            const bubble = document.createElement('div');
-            bubble.className = 'bubble';
-            bubble.style.left = Math.random() * 100 + 'vw';
-            bubble.style.top = Math.random() * 100 + 'vh';
-            bubble.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`; // Random pastel colors
-            document.body.appendChild(bubble);
+    <footer>
+        <p>&copy; 2024 My Advanced Website</p>
+    </footer>
 
-            setTimeout(() => {
-                bubble.remove();
-            }, 6000); // Remove bubble after 6 seconds
-        }
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Message sent! Thank you, ' + document.getElementById('name').value);
+            this.reset(); // Clear form
+        });
     </script>
 </body>
 </html>
