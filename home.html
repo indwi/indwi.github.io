@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website Title</title>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
             font-family: 'Oswald', sans-serif;
@@ -44,24 +45,32 @@
         nav input[type="text"] {
             padding: 8px;
             margin-right: 10px;
-            border: none;
+            border: 1px solid #ccc; /* Add border */
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* White background */
+            color: #000; /* Black text */
         }
 
         nav button {
-            background-color: #ff9900;
-            color: #fff;
-            border: none;
+            background-color: #fff; /* White background */
+            color: #000; /* Black text */
+            border: 1px solid #ccc; /* Add border */
             padding: 10px 15px;
             cursor: pointer;
             border-radius: 5px;
             margin-left: 10px;
             transition: background-color 0.3s;
+            text-transform: lowercase; /* Make text lowercase */
+            display: flex;
+            align-items: center; /* Center icon vertically */
+        }
+
+        nav button i {
+            margin-right: 5px; /* Space between icon and text */
         }
 
         nav button:hover {
-            background-color: #e68a00;
+            background-color: #f0f0f0; /* Slightly darker on hover */
         }
 
         .content {
@@ -96,24 +105,24 @@
 </head>
 <body>
     <header>
-        <h1>indi's plants</h1>
+        <h1>Your Website Name</h1>
         <nav>
             <form id="searchForm" onsubmit="return handleSearch(event)">
                 <input type="text" id="searchInput" placeholder="Search...">
-                <button type="submit">Explore</button>
-                <button>cart</button>
+                <button type="submit">explore</button>
+                <button><i class="fas fa-shopping-cart"></i> cart</button>
             </form>
         </nav>
     </header>
 
     <main>
         <div class="background">
-            <div class="business-name">indi's plants</div>
+            <div class="business-name">Your Business Name Here</div>
         </div>
 
         <div class="content">
-            <h2>welcome to indi's plants</h2>
-            <p>discover amazing gardens!</p>
+            <h2>Welcome to Our Website</h2>
+            <p>Discover amazing things!</p>
         </div>
     </main>
 
