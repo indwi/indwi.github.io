@@ -3,203 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>indi's website</title>
+    <title>Your Website Title</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
+            font-family: 'Roboto', sans-serif;
             margin: 0;
-            font-family: 'Bodoni', sans-serif;
-            background: #000000; /* Light background */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
+            padding: 0;
+            background-color: #f5f5f5;
         }
 
         header {
-            background: #000000; /* Dark teal */
-            color: white;
-            padding: 20px;
+            background-color: #000;
+            color: #fff;
             text-align: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px 0;
         }
 
-        nav {
-            margin: 10px 0;
+        h1 {
+            margin: 0;
+            font-size: 2.5em;
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ffcc80; /* Light orange on hover */
-        }
-
-        .hero {
-            background: url('https://i.gifer.com/embedded/download/Jz1P.gif') no-repeat center center/cover;
-            height: 60vh;
+        .video-container {
             display: flex;
-            align-items: center;
             justify-content: center;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-            flex-direction: column;
-            position: relative;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3); /* Dark overlay */
-            z-index: 1;
-        }
-
-        .hero h1, .hero p {
-            position: relative;
-            z-index: 2;
-        }
-
-        .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            padding: 20px;
+            height: calc(100vh - 160px); /* Adjust height based on header/footer */
         }
 
-        .section {
-            width: 80%;
-            max-width: 800px;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin: 20px 0;
-            padding: 20px;
-            transition: transform 0.3s;
-        }
-
-        .section:hover {
-            transform: translateY(-5px);
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 20px;
-            width: 80%;
-            max-width: 800px;
-        }
-
-        .card {
-            background: #e0f7fa; /* Light cyan */
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .card:hover {
-            transform: scale(1.05);
+        video {
+            max-width: 100%;
+            height: auto;
         }
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: #00796b;
-            color: white;
-            width: 100%;
-        }
-
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            nav a {
-                margin: 0 10px;
-            }
+            padding: 10px 0;
+            background-color: #000;
+            color: #fff;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>indi's website</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#contact">Contact</a>
-        </nav>
+        <h1>Your Brand Name</h1>
     </header>
-
-    <div class="hero">
-        <h1>welcome to indi's website</h1>
-    </div>
-
-    <div class="container">
-        <div class="section" id="about">
-            <h2>About Us</h2>
-            <p>We are a dedicated team passionate about building innovative web solutions.</p>
+    <main>
+        <div class="video-container">
+            <video controls>
+                <source src="your-video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
         </div>
-
-        <div class="section" id="services">
-            <h2>Our Services</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>Web Development</h3>
-                    <p>Building responsive and dynamic websites.</p>
-                </div>
-                <div class="card">
-                    <h3>Design Services</h3>
-                    <p>Creating visually appealing designs.</p>
-                </div>
-                <div class="card">
-                    <h3>SEO Optimization</h3>
-                    <p>Improving your website's visibility on search engines.</p>
-                </div>
-                <div class="card">
-                    <h3>Content Creation</h3>
-                    <p>Crafting engaging content to attract your audience.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="contact">
-            <h2>Contact Us</h2>
-            <form id="contactForm">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required><br><br>
-                <label for="email">Email:</label>
-                <input type="email" id="email" required><br><br>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </div>
-
+    </main>
     <footer>
-        <p>&copy; 2024 My Advanced Website</p>
+        <p>© 2024 Your Brand. All rights reserved.</p>
     </footer>
-
-    <script>
-        document.getElementById('contactForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Message sent! Thank you, ' + document.getElementById('name').value);
-            this.reset(); // Clear form
-        });
-    </script>
 </body>
 </html>
