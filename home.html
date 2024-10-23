@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Oswald', sans-serif; /* Updated to Oswald */
+            font-family: 'Oswald', sans-serif;
             margin: 0;
             padding: 0;
             color: #333;
@@ -32,6 +32,11 @@
         }
 
         nav {
+            display: flex;
+            align-items: center;
+        }
+
+        nav form {
             display: flex;
             align-items: center;
         }
@@ -91,27 +96,43 @@
 </head>
 <body>
     <header>
-        <h1>Your Website Name</h1>
+        <h1>indi's plants</h1>
         <nav>
-            <input type="text" placeholder="Search...">
-            <button>Explore</button>
-            <button>Cart</button>
+            <form id="searchForm" onsubmit="return handleSearch(event)">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <button type="submit">Explore</button>
+                <button>cart</button>
+            </form>
         </nav>
     </header>
 
     <main>
         <div class="background">
-            <div class="business-name">Your Business Name Here</div>
+            <div class="business-name">indi's plants</div>
         </div>
 
         <div class="content">
-            <h2>Welcome to Our Website</h2>
-            <p>Discover amazing things!</p>
+            <h2>welcome to indi's plants</h2>
+            <p>discover amazing gardens!</p>
         </div>
     </main>
 
     <footer>
         <p>© 2024 Your Brand. All rights reserved.</p>
     </footer>
+
+    <script>
+        function handleSearch(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            const query = document.getElementById('searchInput').value; // Get the input value
+            if (query) {
+                alert('You searched for: ' + query);
+                // Redirect or perform a search action here
+            } else {
+                alert('Please enter a search term.');
+            }
+        }
+    </script>
 </body>
 </html>
