@@ -3,211 +3,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Indi's Fruit Market</title>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Urban Streetwear Store</title>
+    <script src="script.js" defer></script>
     <style>
-        body {
-            font-family: 'Oswald', sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
             color: #333;
-            background-color: #fff8e1; /* Light cream background */
         }
 
         header {
-            background-color: #ff7043; /* Warm orange */
+            background: #000;
             color: #fff;
-            display: flex;
-            align-items: center;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        h1 {
-            margin: 0;
-            flex: 1;
-            font-size: 1.8em;
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-        }
-
-        nav form {
-            display: flex;
-            align-items: center;
-        }
-
-        nav input[type="text"] {
-            padding: 8px;
-            margin-right: 10px;
-            border: 1px solid #ccc; 
-            border-radius: 5px;
-            background-color: #fff; 
-            color: #000; 
-            text-transform: lowercase; 
-        }
-
-        nav a, nav button {
-            background-color: #fff; 
-            color: #000; 
-            border: 1px solid #ccc; 
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-left: 10px;
-            text-transform: lowercase; 
-            display: flex;
-            align-items: center; 
-            text-decoration: none; /* Remove underline from link */
-            transition: background-color 0.3s;
-        }
-
-        nav a:hover, nav button:hover {
-            background-color: #f0f0f0; 
-        }
-
-        nav button i {
-            margin-right: 5px; 
-        }
-
-        .hero {
-            background: url('https://media1.giphy.com/media/QrYpdVF1uRvb2/200w.gif?cid=6c09b952ndmjzxaj37we7pwuviq59eo1ubvgz0embis6ild1&ep=v1_gifs_search&rid=200w.gif&ct=g') no-repeat center center;
-            background-size: cover;
-            height: 50vh; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-        }
-
-        .business-name {
-            font-size: 2.5em;
+            padding: 20px;
             text-align: center;
-            color: #fff; 
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-            position: absolute;
-            bottom: 20px; 
-            left: 50%;
-            transform: translateX(-50%);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .content {
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
+        #hero {
+            background: url('hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            color: white;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
+            text-align: center;
             padding: 20px;
         }
 
-        .fruit-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-            width: 100%;
-            max-width: 1200px;
+        #hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
         }
 
-        .fruit-item {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+        #shop {
+            padding: 40px 20px;
             text-align: center;
-            padding: 10px;
         }
 
-        .fruit-item img {
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -15px;
+        }
+
+        .product {
+            background: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            width: 250px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
             width: 100%;
-            height: auto;
-            border-radius: 10px 10px 0 0;
+            border-radius: 10px;
         }
 
-        .fruit-item p {
-            margin: 10px 0 0;
-            font-weight: 600;
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .product p {
+            font-size: 1.2em;
+            color: #ff4081;
         }
 
         footer {
-            background-color: #ff7043; 
-            color: #fff; 
+            background: #000;
+            color: white;
             text-align: center;
-            padding: 15px 0;
+            padding: 15px;
             position: relative;
             bottom: 0;
             width: 100%;
+            margin-top: 40px;
+        }
+
+        .lookbook-gallery {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .lookbook-gallery img {
+            margin: 10px;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #contact {
+            padding: 20px;
+            text-align: center;
+        }
+
+        #contact form {
+            display: inline-block;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        #contact label {
+            margin: 10px 0;
+            display: block;
+        }
+
+        #contact input, #contact textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #contact button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        #contact button:hover {
+            background: #e63946;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Indi's Fruit Market</h1>
+        <h1>Urban Streetwear</h1>
         <nav>
-            <form id="searchForm" onsubmit="return handleSearch(event)">
-                <input type="text" id="searchInput" placeholder="search fruits...">
-                <a href="explore.html" class="explore-button">explore</a>
-                <button type="button"><i class="fas fa-shopping-cart"></i> cart</button>
-            </form>
+            <ul>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#lookbook">Lookbook</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
         </nav>
     </header>
 
-    <main>
-        <div class="hero">
-            <div class="business-name">Fresh Fruits Delivered</div>
-        </div>
+    <section id="hero">
+        <h2>Your Style, Your Statement</h2>
+        <p>Discover the latest in urban fashion.</p>
+    </section>
 
-        <div class="content">
-            <h2>Our Fresh Fruits</h2>
-            <div class="fruit-gallery">
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/FF5733/FFFFFF?text=Apple" alt="Apple">
-                    <p>Apple</p>
-                </div>
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/FFCA28/FFFFFF?text=Banana" alt="Banana">
-                    <p>Banana</p>
-                </div>
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/FF9800/FFFFFF?text=Orange" alt="Orange">
-                    <p>Orange</p>
-                </div>
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/E91E63/FFFFFF?text=Strawberry" alt="Strawberry">
-                    <p>Strawberry</p>
-                </div>
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/4CAF50/FFFFFF?text=Grapes" alt="Grapes">
-                    <p>Grapes</p>
-                </div>
-                <div class="fruit-item">
-                    <img src="https://via.placeholder.com/150/FFEB3B/FFFFFF?text=Peach" alt="Peach">
-                    <p>Peach</p>
-                </div>
+    <section id="shop">
+        <h2>Shop</h2>
+        <div class="product-grid">
+            <div class="product" data-name="Cool Hoodie" data-price="49.99">
+                <img src="hoodie.jpg" alt="Hoodie">
+                <h3>Cool Hoodie</h3>
+                <p>$49.99</p>
+                <button class="add-to-cart">Add to Cart</button>
             </div>
+            <div class="product" data-name="Graphic T-Shirt" data-price="29.99">
+                <img src="tshirt.jpg" alt="T-Shirt">
+                <h3>Graphic T-Shirt</h3>
+                <p>$29.99</p>
+                <button class="add-to-cart">Add to Cart</button>
+            </div>
+            <!-- Add more products as needed -->
         </div>
-    </main>
+    </section>
+
+    <section id="about">
+        <h2>About Us</h2>
+        <p>We are passionate about urban fashion, bringing you unique designs that speak to the street culture.</p>
+    </section>
+
+    <section id="lookbook">
+        <h2>Lookbook</h2>
+        <p>Check out our latest styles in action!</p>
+        <div class="lookbook-gallery">
+            <img src="look1.jpg" alt="Look 1">
+            <img src="look2.jpg" alt="Look 2">
+            <img src="look3.jpg" alt="Look 3">
+            <!-- Add more lookbook images as needed -->
+        </div>
+    </section>
+
+    <section id="blog">
+        <h2>Blog</h2>
+        <article>
+            <h3>5 Tips for Styling Streetwear</h3>
+            <p>Learn how to elevate your streetwear game with these simple tips...</p>
+        </article>
+        <!-- Add more blog posts as needed -->
+    </section>
+
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </section>
 
     <footer>
-        <p>© 2024 Indi's Fruit Market. All rights reserved.</p>
+        <p>Follow us on social media!</p>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
     </footer>
 
-    <script>
-        function handleSearch(event) {
-            event.preventDefault(); // Prevent the default form submission
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Item Added to Cart</h2>
+            <p id="cart-item"></p>
+            <button id="checkout">Checkout</button>
+        </div>
+    </div>
 
-            const query = document.getElementById('searchInput').value; // Get the input value
-            if (query) {
-                alert('You searched for: ' + query);
-                // Redirect or perform a search action here
-            } else {
-                alert('Please enter a search term.');
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartButtons = document.querySelectorAll('.add-to-cart');
+            const modal = document.getElementById('cart-modal');
+            const closeModal = document.querySelector('.close');
+            const cartItem = document.getElementById('cart-item');
+
+            cartButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const product = event.target.parentElement;
+                    const productName = product.getAttribute('data-name');
+                    const productPrice = product.getAttribute('data-price');
+
+                    cartItem.textContent = `${productName} - $${productPrice} added to your cart!`;
+                    modal.style.display = "block";
+                });
+            });
+
+            closeModal.onclick = () => {
+                modal.style.display = "none";
             }
-        }
+
+            window.onclick = (event) => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
+                }
+            }
+        });
     </script>
 </body>
 </html>
