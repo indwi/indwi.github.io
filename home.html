@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Urban Streetwear Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
     <script src="script.js" defer></script>
     <style>
         * {
@@ -13,9 +16,10 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Oswald', sans-serif;
             background-color: #f0f0f0;
             color: #333;
+            text-transform: lowercase;
         }
 
         header {
@@ -117,20 +121,6 @@
             margin-top: 40px;
         }
 
-        .lookbook-gallery {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px 0;
-        }
-
-        .lookbook-gallery img {
-            margin: 10px;
-            width: 300px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-        }
-
         .modal {
             display: none;
             position: fixed;
@@ -208,92 +198,50 @@
 </head>
 <body>
     <header>
-        <h1>Urban Streetwear</h1>
+        <h1>urban streetwear</h1>
         <nav>
             <ul>
-                <li><a href="#shop">Shop</a></li>
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#lookbook">Lookbook</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#shop">shop</a></li>
             </ul>
         </nav>
     </header>
 
     <section id="hero">
-        <h2>Your Style, Your Statement</h2>
-        <p>Discover the latest in urban fashion.</p>
+        <h2>your style, your statement</h2>
+        <p>discover the latest in urban fashion.</p>
     </section>
 
     <section id="shop">
-        <h2>Shop</h2>
+        <h2>shop</h2>
         <div class="product-grid">
-            <div class="product" data-name="Cool Hoodie" data-price="49.99">
-                <img src="hoodie.jpg" alt="Hoodie">
-                <h3>Cool Hoodie</h3>
+            <div class="product" data-name="cool hoodie" data-price="49.99">
+                <img src="hoodie.jpg" alt="hoodie">
+                <h3>cool hoodie</h3>
                 <p>$49.99</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart">add to cart</button>
             </div>
-            <div class="product" data-name="Graphic T-Shirt" data-price="29.99">
-                <img src="tshirt.jpg" alt="T-Shirt">
-                <h3>Graphic T-Shirt</h3>
+            <div class="product" data-name="graphic t-shirt" data-price="29.99">
+                <img src="tshirt.jpg" alt="t-shirt">
+                <h3>graphic t-shirt</h3>
                 <p>$29.99</p>
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart">add to cart</button>
             </div>
             <!-- Add more products as needed -->
         </div>
     </section>
 
-    <section id="about">
-        <h2>About Us</h2>
-        <p>We are passionate about urban fashion, bringing you unique designs that speak to the street culture.</p>
-    </section>
-
-    <section id="lookbook">
-        <h2>Lookbook</h2>
-        <p>Check out our latest styles in action!</p>
-        <div class="lookbook-gallery">
-            <img src="look1.jpg" alt="Look 1">
-            <img src="look2.jpg" alt="Look 2">
-            <img src="look3.jpg" alt="Look 3">
-            <!-- Add more lookbook images as needed -->
-        </div>
-    </section>
-
-    <section id="blog">
-        <h2>Blog</h2>
-        <article>
-            <h3>5 Tips for Styling Streetwear</h3>
-            <p>Learn how to elevate your streetwear game with these simple tips...</p>
-        </article>
-        <!-- Add more blog posts as needed -->
-    </section>
-
-    <section id="contact">
-        <h2>Contact Us</h2>
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <label for="message">Message:</label>
-            <textarea id="message" name="message" required></textarea>
-            <button type="submit">Send</button>
-        </form>
-    </section>
-
     <footer>
-        <p>Follow us on social media!</p>
-        <a href="#">Instagram</a>
-        <a href="#">TikTok</a>
+        <p>follow us on social media!</p>
+        <a href="#">instagram</a>
+        <a href="#">tiktok</a>
     </footer>
 
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <h2>Item Added to Cart</h2>
+            <h2>item added to cart</h2>
             <p id="cart-item"></p>
-            <button id="checkout">Checkout</button>
+            <button id="checkout">checkout</button>
         </div>
     </div>
 
