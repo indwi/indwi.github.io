@@ -34,7 +34,7 @@
         .cart-button {
             position: absolute;
             top: 20px;
-            right: 80px;
+            right: 10px;
             background: #ff4081;
             color: white;
             border: none;
@@ -52,7 +52,7 @@
         .search-bar {
             position: absolute;
             top: 20px;
-            right: 10px;
+            right: 80px;
             display: flex;
         }
 
@@ -61,6 +61,10 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 0.9em;
+            width: 200px;
+            margin-right: 5px;
+            background: white;
+            color: black;
         }
 
         .search-button {
@@ -72,7 +76,6 @@
             cursor: pointer;
             font-size: 0.9em;
             transition: background 0.3s;
-            margin-left: 5px;
         }
 
         .search-button:hover {
@@ -210,10 +213,9 @@
 <body>
     <header>
         <h1>urban streetwear</h1>
-        <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
         <div class="search-bar">
             <input type="text" class="search-input" placeholder="search..." />
-            <button class="search-button">search</button>
+            <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
         </div>
         <nav>
             <ul>
