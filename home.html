@@ -28,6 +28,55 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .cart-button {
+            position: absolute;
+            top: 20px;
+            right: 80px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #e63946;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            display: flex;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+
+        .search-button {
+            background: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+            margin-left: 5px;
+        }
+
+        .search-button:hover {
+            background: #e63946;
         }
 
         nav ul {
@@ -156,49 +205,16 @@
             text-decoration: none;
             cursor: pointer;
         }
-
-        #contact {
-            padding: 20px;
-            text-align: center;
-        }
-
-        #contact form {
-            display: inline-block;
-            text-align: left;
-            margin-top: 20px;
-        }
-
-        #contact label {
-            margin: 10px 0;
-            display: block;
-        }
-
-        #contact input, #contact textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #contact button {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-        }
-
-        #contact button:hover {
-            background: #e63946;
-        }
     </style>
 </head>
 <body>
     <header>
         <h1>urban streetwear</h1>
+        <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="search..." />
+            <button class="search-button">search</button>
+        </div>
         <nav>
             <ul>
                 <li><a href="#shop">shop</a></li>
