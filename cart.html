@@ -133,24 +133,23 @@
             <!-- Cart items will be inserted here dynamically -->
         </div>
         <p id="total-price" style="font-size: 1.5em; margin: 20px 0;"></p>
-        <button class="checkout-button" id="checkout-button">Checkout</button>
+        <button class="checkout-button" id="checkout-button">checkout</button>
     </div>
 
     <div class="product-container">
         <h2>available products</h2>
-        <div class="product" data-name="Cool Hoodie" data-price="49.99">
-            <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="Cool Hoodie" width="100">
-            <h3>Cool Hoodie</h3>
+        <div class="product" data-name="cool hoodie" data-price="49.99">
+            <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="cool hoodie" width="100">
+            <h3>cool hoodie</h3>
             <p>$49.99</p>
             <button class="add-to-cart">add to cart</button>
         </div>
         <div class="product" data-name="graphic t-shirt" data-price="29.99">
-            <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="Graphic T-Shirt" width="100">
+            <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="graphic t-shirt" width="100">
             <h3>graphic t-shirt</h3>
             <p>$29.99</p>
             <button class="add-to-cart">add to cart</button>
         </div>
-        <!-- Add more products as needed -->
     </div>
 
     <footer>
@@ -170,18 +169,15 @@
                 const productName = productElement.getAttribute('data-name');
                 const productPrice = parseFloat(productElement.getAttribute('data-price'));
 
-                // Add product to cart
                 cartItems.push({ name: productName, price: productPrice });
                 updateCart();
             });
         });
 
         function updateCart() {
-            // Clear the cart display
             cartItemsContainer.innerHTML = '';
             let totalPrice = 0;
 
-            // Populate cart items
             cartItems.forEach(item => {
                 totalPrice += item.price;
                 const itemDiv = document.createElement('div');
@@ -194,13 +190,12 @@
                 cartItemsContainer.appendChild(itemDiv);
             });
 
-            // Update total price
             totalPriceElement.textContent = `total: $${totalPrice.toFixed(2)}`;
         }
 
         document.getElementById('checkout-button').addEventListener('click', () => {
-            alert('Proceeding to checkout...');
-            // Implement checkout functionality
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+            window.location.href = 'checkout.html';
         });
     </script>
 </body>
