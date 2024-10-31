@@ -26,10 +26,27 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         h1 {
             margin: 0;
+        }
+
+        .header-buttons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .header-button {
+            background: transparent;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-right: 15px;
+            text-transform: lowercase;
         }
 
         .cart-container {
@@ -96,34 +113,26 @@
             color: #ff4081; 
         }
 
-        .product {
-            margin: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background: white;
+        .product-thumbnail {
             display: flex;
-            flex-direction: column;
             align-items: center;
+            margin-bottom: 10px;
         }
 
-        .add-to-cart {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 20px;
+        .product-thumbnail img {
+            width: 30px;
+            margin-right: 10px;
             border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #e0306b;
         }
     </style>
 </head>
 <body>
     <header>
+        <div class="header-buttons">
+            <button class="header-button" onclick="window.location.href='index.html'">home</button>
+            <button class="header-button" onclick="window.location.href='shop.html'">shop</button>
+            <button class="header-button" onclick="window.location.href='cart.html'">cart</button>
+        </div>
         <h1>urban streetwear</h1>
     </header>
 
@@ -134,22 +143,6 @@
         </div>
         <p id="total-price" style="font-size: 1.5em; margin: 20px 0;"></p>
         <button class="checkout-button" id="checkout-button">checkout</button>
-    </div>
-
-    <div class="product-container">
-        <h2>available products</h2>
-        <div class="product" data-name="cool hoodie" data-price="49.99">
-            <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="cool hoodie" width="100">
-            <h3>cool hoodie</h3>
-            <p>$49.99</p>
-            <button class="add-to-cart">add to cart</button>
-        </div>
-        <div class="product" data-name="graphic t-shirt" data-price="29.99">
-            <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="graphic t-shirt" width="100">
-            <h3>graphic t-shirt</h3>
-            <p>$29.99</p>
-            <button class="add-to-cart">add to cart</button>
-        </div>
     </div>
 
     <footer>
@@ -168,8 +161,9 @@
                 const productElement = button.parentElement;
                 const productName = productElement.getAttribute('data-name');
                 const productPrice = parseFloat(productElement.getAttribute('data-price'));
+                const productImage = productElement.querySelector('img').src;
 
-                cartItems.push({ name: productName, price: productPrice });
+                cartItems.push({ name: productName, price: productPrice, image: productImage });
                 updateCart();
             });
         });
@@ -183,9 +177,11 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'cart-item';
                 itemDiv.innerHTML = `
-                    <img src="https://example.com/image.jpg" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>$${item.price.toFixed(2)}</p>
+                    <div class="product-thumbnail">
+                        <img src="${item.image}" alt="${item.name}">
+                        <h3>${item.name}</h3>
+                        <p>$${item.price.toFixed(2)}</p>
+                    </div>
                 `;
                 cartItemsContainer.appendChild(itemDiv);
             });
