@@ -129,7 +129,7 @@
     <header>
         <h1>urban streetwear</h1>
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="search..." />
+            <input type="text" class="search-input" placeholder="search..." id="search-input" />
             <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
         </div>
         <nav>
@@ -208,6 +208,21 @@
         document.getElementById('checkout-button').addEventListener('click', () => {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             window.location.href = 'checkout.html';
+        });
+
+        // Search functionality
+        document.getElementById('search-input').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const products = document.querySelectorAll('.product');
+
+            products.forEach(product => {
+                const productName = product.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    product.style.display = 'block'; // Show matching product
+                } else {
+                    product.style.display = 'none'; // Hide non-matching product
+                }
+            });
         });
     </script>
 </body>
