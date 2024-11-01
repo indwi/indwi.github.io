@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>your cart | urban streetwear store</title>
+    <title>Urban Streetwear Store</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
@@ -20,6 +20,31 @@
             font-family: 'Oswald', sans-serif;
             background-color: #f0f0f0;
             color: #333;
+            text-transform: lowercase;
+            position: relative; /* Allow positioning for video */
+            overflow: shown; 
+        }
+
+        .video-background {
+            position: fixed; /* Position the video fixed */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Keep it behind all other content */
+            overflow: hidden;
+        }
+
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
         }
 
         header {
@@ -35,50 +60,117 @@
             margin: 0;
         }
 
-        .cart-container {
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            display: flex;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            width: 200px;
+            margin-right: 5px;
+            background: white;
+            color: black;
+        }
+
+        .cart-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #e0e0e0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
+        #hero {
+            background: url('hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        #shop {
             padding: 40px 20px;
             text-align: center;
         }
 
-        .cart-item {
+        .product-grid {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -15px;
+        }
+
+        .product {
             background: white;
-            margin: 15px 0;
-            padding: 15px;
+            margin: 15px;
+            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            width: 250px;
         }
 
-        .cart-item img {
-            width: 50px;
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
             border-radius: 10px;
         }
 
-        .cart-item h3 {
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .product p {
             font-size: 1.2em;
-            margin: 0;
-        }
-
-        .cart-item p {
-            font-size: 1.1em;
             color: #ff4081;
-        }
-
-        .checkout-button {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background 0.3s;
-        }
-
-        .checkout-button:hover {
-            background: #e0306b;
         }
 
         footer {
@@ -86,6 +178,9 @@
             color: white;
             text-align: center;
             padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
             margin-top: 40px;
         }
 
@@ -99,37 +194,53 @@
             color: #ff4081; 
         }
 
-        .product {
-            margin: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
             border-radius: 10px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            text-align: center;
         }
 
-        .add-to-cart {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #e0306b;
         }
     </style>
 </head>
 <body>
+    
+    <div class="video-background">
+        <iframe src="https://www.youtube.com/embed/8W-timQTi48?autoplay=1&mute=1&loop=1&playlist=8W-timQTi48" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+
     <header>
         <h1>urban streetwear</h1>
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="search..." id="search-input" />
+            <input type="text" class="search-input" placeholder="search..." />
             <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
         </div>
         <nav>
@@ -139,30 +250,29 @@
         </nav>
     </header>
 
-    <div class="cart-container">
-        <h2>your cart</h2>
-        <div id="cart-items">
-            <!-- Cart items will be inserted here dynamically -->
-        </div>
-        <p id="total-price" style="font-size: 1.5em; margin: 20px 0;"></p>
-        <button class="checkout-button" id="checkout-button">checkout</button>
-    </div>
+    <section id="hero">
+        <h2>your style, your statement</h2>
+        <p>discover the latest in urban fashion.</p>
+    </section>
 
-    <div class="product-container">
-        <h2>available products</h2>
-        <div class="product" data-name="cool hoodie" data-price="49.99">
-            <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="cool hoodie" width="100">
-            <h3>cool hoodie</h3>
-            <p>$49.99</p>
-            <button class="add-to-cart">add to cart</button>
+    <section id="shop">
+        <h2>shop</h2>
+        <div class="product-grid">
+            <div class="product" data-name="cool hoodie" data-price="49.99">
+                <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="hoodie">
+                <h3>cool hoodie</h3>
+                <p>$49.99</p>
+                <button class="add-to-cart">add to cart</button>
+            </div>
+            <div class="product" data-name="graphic t-shirt" data-price="29.99">
+                <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="t-shirt">
+                <h3>graphic t-shirt</h3>
+                <p>$29.99</p>
+                <button class="add-to-cart">add to cart</button>
+            </div>
+            <!-- Add more products as needed -->
         </div>
-        <div class="product" data-name="graphic t-shirt" data-price="29.99">
-            <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="graphic t-shirt" width="100">
-            <h3>graphic t-shirt</h3>
-            <p>$29.99</p>
-            <button class="add-to-cart">add to cart</button>
-        </div>
-    </div>
+    </section>
 
     <footer>
         <p>follow us on social media!</p>
@@ -170,59 +280,42 @@
         <a href="#" class="social-link">tiktok</a>
     </footer>
 
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>item added to cart</h2>
+            <p id="cart-item"></p>
+            <button id="checkout">checkout</button>
+        </div>
+    </div>
+
     <script>
-        const cartItems = [];
-        const cartItemsContainer = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartButtons = document.querySelectorAll('.add-to-cart');
+            const modal = document.getElementById('cart-modal');
+            const closeModal = document.querySelector('.close');
+            const cartItem = document.getElementById('cart-item');
 
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const productElement = button.parentElement;
-                const productName = productElement.getAttribute('data-name');
-                const productPrice = parseFloat(productElement.getAttribute('data-price'));
+            cartButtons.forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const product = event.target.parentElement;
+                    const productName = product.getAttribute('data-name');
+                    const productPrice = product.getAttribute('data-price');
 
-                cartItems.push({ name: productName, price: productPrice });
-                updateCart();
-            });
-        });
-
-        function updateCart() {
-            cartItemsContainer.innerHTML = '';
-            let totalPrice = 0;
-
-            cartItems.forEach(item => {
-                totalPrice += item.price;
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <img src="https://example.com/image.jpg" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>$${item.price.toFixed(2)}</p>
-                `;
-                cartItemsContainer.appendChild(itemDiv);
+                    cartItem.textContent = ${productName} - $${productPrice} added to your cart!;
+                    modal.style.display = "block";
+                });
             });
 
-            totalPriceElement.textContent = `total: $${totalPrice.toFixed(2)}`;
-        }
+            closeModal.onclick = () => {
+                modal.style.display = "none";
+            }
 
-        document.getElementById('checkout-button').addEventListener('click', () => {
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            window.location.href = 'checkout.html';
-        });
-
-        // Search functionality
-        document.getElementById('search-input').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const products = document.querySelectorAll('.product');
-
-            products.forEach(product => {
-                const productName = product.querySelector('h3').textContent.toLowerCase();
-                if (productName.includes(searchTerm)) {
-                    product.style.display = 'block'; // Show matching product
-                } else {
-                    product.style.display = 'none'; // Hide non-matching product
+            window.onclick = (event) => {
+                if (event.target === modal) {
+                    modal.style.display = "none";
                 }
-            });
+            }
         });
     </script>
 </body>
