@@ -10,8 +10,226 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <script src="script.js" defer></script>
     <style>
-        /* Your existing CSS styles here... */
-        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Oswald', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            text-transform: lowercase;
+            position: relative; 
+            overflow: shown; 
+        }
+
+        .video-background {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; 
+            overflow: hidden;
+        }
+
+        .video-background iframe {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            pointer-events: none; 
+        }
+
+        header {
+            background: #000;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            display: flex;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            width: 200px;
+            margin-right: 5px;
+            background: white;
+            color: black;
+        }
+
+        .cart-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #ff4081;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
+        #hero {
+            background: url('hero-image.jpg') no-repeat center center;
+            background-size: cover;
+            height: 400px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        #hero h2 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        #shop {
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .product-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 0 -15px;
+        }
+
+        .product {
+            background: white;
+            margin: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+            width: 250px;
+        }
+
+        .product:hover {
+            transform: scale(1.05);
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.5em;
+        }
+
+        .product p {
+            font-size: 1.2em;
+            color: #ff4081;
+        }
+
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            color: white; 
+            text-decoration: none; 
+            margin: 0 10px; 
+        }
+
+        .social-link:hover {
+            color: #ff4081; 
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         /* Chatbox styles */
         #chatbox {
             position: fixed;
@@ -103,8 +321,8 @@
 
     <footer>
         <p>follow us on social media!</p>
-        <a href="#" class="instagram.com">instagram</a>
-        <a href="#" class="tiktok.com">tiktok</a>
+        <a href="#" class="social-link">instagram</a>
+        <a href="#" class="social-link">tiktok</a>
     </footer>
 
     <div id="cart-modal" class="modal">
@@ -123,25 +341,7 @@
         <button id="sendButton">Send</button>
     </div>
 
-    <script src="/socket.io/socket.io.js"></script>
     <script>
-        const socket = io(); // Make sure your server is set up to handle this
-
-        // Handle sending messages
-        document.getElementById('sendButton').onclick = function() {
-            const message = document.getElementById('messageInput').value;
-            socket.emit('chat message', message);
-            document.getElementById('messageInput').value = '';
-        };
-
-        // Display received messages
-        socket.on('chat message', function(msg) {
-            const item = document.createElement('div');
-            item.textContent = msg;
-            document.getElementById('messages').appendChild(item);
-        });
-
-        // Your existing JavaScript for the modal...
         document.addEventListener("DOMContentLoaded", () => {
             const cartButtons = document.querySelectorAll('.add-to-cart');
             const modal = document.getElementById('cart-modal');
@@ -161,13 +361,30 @@
 
             closeModal.onclick = () => {
                 modal.style.display = "none";
-            };
+            }
 
             window.onclick = (event) => {
                 if (event.target === modal) {
                     modal.style.display = "none";
                 }
-            };
+            }
+        });
+
+        // Socket.io setup (ensure you have included Socket.io)
+        const socket = io(); // Adjust as needed for your server setup
+
+        // Handle sending messages
+        document.getElementById('sendButton').onclick = function() {
+            const message = document.getElementById('messageInput').value;
+            socket.emit('chat message', message);
+            document.getElementById('messageInput').value = '';
+        };
+
+        // Display received messages
+        socket.on('chat message', function(msg) {
+            const item = document.createElement('div');
+            item.textContent = msg;
+            document.getElementById('messages').appendChild(item);
         });
     </script>
 </body>
