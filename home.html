@@ -368,23 +368,65 @@
                     modal.style.display = "none";
                 }
             }
-        });
 
-        // Socket.io setup (ensure you have included Socket.io)
-        const socket = io(); // Adjust as needed for your server setup
+            // Chat functionality
+            const messagesDiv = document.getElementById('messages');
+            const messageInput = document.getElementById('messageInput');
+            const sendButton = document.getElementById('sendButton');
 
-        // Handle sending messages
-        document.getElementById('sendButton').onclick = function() {
-            const message = document.getElementById('messageInput').value;
-            socket.emit('chat message', message);
-            document.getElementById('messageInput').value = '';
-        };
+            sendButton.onclick = function() {
+                const userMessage = messageInput.value;
+                if (userMessage) {
+                    // Display user's message
+                    const userItem = document.createElement('div');
+                    userItem.textContent = `You: ${userMessage}`;
+                    messagesDiv.appendChild(userItem);
+                    
+                    // Get bot response
+                    const botResponse = getBotResponse(userMessage);
+                    const botItem = document.createElement('div');
+                    botItem.innerHTML = `Bot: ${botResponse}`; // Use innerHTML for links
+                    messagesDiv.appendChild(botItem);
 
-        // Display received messages
-        socket.on('chat message', function(msg) {
-            const item = document.createElement('div');
-            item.textContent = msg;
-            document.getElementById('messages').appendChild(item);
+                    // Clear input
+                    messageInput.value = '';
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll to the bottom
+                }
+            };
+
+            function getBotResponse(message) {
+                // Normalize the input message
+                const normalizedMessage = message.toLowerCase();
+
+                // Define responses for specific messages
+                const responses = {
+                    "hi": "Hey! How can I help?",
+                    "hello": "Hey! How can I help?",
+                    "hey": "Hey! How can I help?",
+                    "location":"We are located in Harrow, London.",
+                    "where":"We are located in Harrow, London.",
+                    "clothing": "We have a large range of unisex streetwear and customizable options.",
+                    "clothes":"We have a large range of unisex streetwear and customizable options.",
+                    "what": "We are a clothing store located in Harrow that sells streetwear! Pop in!",
+                    "opening hours": "We are open from 10-4 Monday - Friday, and 10-2 on Saturdays. We are not open on Sundays.",
+                    "hours": "We are open from 10-4 Monday - Friday, and 10-2 on Saturdays. We are not open on Sundays.",
+                    "times":"We are open from 10-4 Monday - Friday, and 10-2 on Saturdays. We are not open on Sundays.",
+                    "secret page": "You found it! Click the link :",
+                    "history": "We were founded in 2015 and have a passion for looking fire.",
+                    "who's indi?": "Indi is the owner, who is also very passionate about looking fire.",
+                    "indi":"Indi is the owner, who is also very passionate about looking fire."
+                };
+
+                // Check for response
+                for (const key in responses) {
+                    if (normalizedMessage.includes(key)) {
+                        return responses[key];
+                    }
+                }
+
+                // Default response if no match is found
+                return "Sorry, I didn't quite catch that. Can I help with anything else?";
+            }
         });
     </script>
 </body>
