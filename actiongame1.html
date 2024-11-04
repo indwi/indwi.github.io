@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin Collector Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            flex-direction: column;
+            font-family: 'Oswald', sans-serif;
+        }
+        #startButton, #restartButton {
+            padding: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        #startButton:hover, #restartButton:hover {
+            background-color: #e73573;
+        }
+        canvas {
+            border: 2px solid #000;
+            background-color: #fff;
+            display: none; /* Initially hide the game canvas */
+        }
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 20px;
+        }
+        #gameOver {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="startButton">Click to Start Game</div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="score">Score: 0</div>
+    <div id="gameOver">Game Over!</div>
+    <button id="restartButton" style="display: none;">Restart Game</button>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const startButton = document.getElementById('startButton');
+        const gameOverDiv = document.getElementById('gameOver');
+        const restartButton = document.getElementById('restartButton');
+        let score = 0;
+        let gameOver = false;
+
+        const player = { x: 50, y: 50, size: 20 };
+        const coin = { x: randomPosition(), y: randomPosition(), size: 15 };
+        const enemies = [];
+        const numEnemies = 3;
+
+        for (let i = 0; i < numEnemies; i++) {
+            enemies.push({ 
+                x: randomPosition(), 
+                y: randomPosition(), 
+                size: 15, 
+                dx: Math.random() < 0.5 ? 1 : -1,
+                dy: Math.random() < 0.5 ? 1 : -1
+            });
+        }
+
+        function randomPosition() {
+            return Math.floor(Math.random() * (canvas.width - 20)) + 10;
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = 'blue';
+            ctx.fillRect(player.x, player.y, player.size, player.size);
+        }
+
+        function drawCoin() {
+            ctx.fillStyle = 'gold';
+            ctx.beginPath();
+            ctx.arc(coin.x, coin.y, coin.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function drawEnemies() {
+            ctx.fillStyle = 'red';
+            enemies.forEach(enemy => {
+                ctx.beginPath();
+                ctx.arc(enemy.x, enemy.y, enemy.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Score: ${score}`;
+        }
+
+        function checkCollision() {
+            if (player.x < coin.x + coin.size && player.x + player.size > coin.x &&
+                player.y < coin.y + coin.size && player.y + player.size > coin.y) {
+                score++;
+                coin.x = randomPosition();
+                coin.y = randomPosition();
+                updateScore();
+            }
+
+            enemies.forEach(enemy => {
+                if (player.x < enemy.x + enemy.size && player.x + player.size > enemy.x &&
+                    player.y < enemy.y + enemy.size && player.y + player.size > enemy.y) {
+                    gameOver = true;
+                    showGameOver();
+                }
+            });
+
+            if (player.x < 0 || player.x + player.size > canvas.width || 
+                player.y < 0 || player.y + player.size > canvas.height) {
+                gameOver = true;
+                showGameOver();
+            }
+        }
+
+        function showGameOver() {
+            gameOverDiv.style.display = 'block';
+            restartButton.style.display = 'block';
+        }
+
+        function moveEnemies() {
+            enemies.forEach(enemy => {
+                enemy.x += enemy.dx;
+                enemy.y += enemy.dy;
+
+                if (enemy.x <= 0 || enemy.x >= canvas.width) enemy.dx *= -1;
+                if (enemy.y <= 0 || enemy.y >= canvas.height) enemy.dy *= -1;
+            });
+        }
+
+        function gameLoop() {
+            if (gameOver) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawPlayer();
+            drawCoin();
+            drawEnemies();
+            checkCollision();
+            moveEnemies();
+            requestAnimationFrame(gameLoop);
+        }
+
+        document.addEventListener('keydown', (event) => {
+            if (gameOver) return;
+            switch (event.key) {
+                case 'ArrowUp':
+                    if (player.y > 0) player.y -= 10;
+                    break;
+                case 'ArrowDown':
+                    if (player.y < canvas.height - player.size) player.y += 10;
+                    break;
+                case 'ArrowLeft':
+                    if (player.x > 0) player.x -= 10;
+                    break;
+                case 'ArrowRight':
+                    if (player.x < canvas.width - player.size) player.x += 10;
+                    break;
+            }
+        });
+
+        startButton.addEventListener('click', () => {
+            canvas.style.display = 'block';
+            startButton.style.display = 'none';
+            gameOver = false;
+            score = 0;
+            updateScore();
+            gameOverDiv.style.display = 'none';
+            restartButton.style.display = 'none';
+            coin.x = randomPosition();
+            coin.y = randomPosition();
+            gameLoop();
+        });
+
+        restartButton.addEventListener('click', () => {
+            gameOver = false;
+            player.x = 50;
+            player.y = 50;
+            score = 0;
+            updateScore();
+            gameOverDiv.style.display = 'none';
+            restartButton.style.display = 'none';
+            coin.x = randomPosition();
+            coin.y = randomPosition();
+            gameLoop();
+        });
+    </script>
+</body>
+</html>
