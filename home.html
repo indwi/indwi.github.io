@@ -10,224 +10,52 @@
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <script src="script.js" defer></script>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Oswald', sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
-            text-transform: lowercase;
-            position: relative; /* Allow positioning for video */
-            overflow: shown; 
-        }
-
-        .video-background {
-            position: fixed; /* Position the video fixed */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Keep it behind all other content */
-            overflow: hidden;
-        }
-
-        .video-background iframe {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            min-width: 100%;
-            min-height: 100%;
-            transform: translate(-50%, -50%);
-            pointer-events: none; 
-        }
-
-        header {
-            background: #000;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        h1 {
-            margin: 0;
-        }
-
-        .search-bar {
-            position: absolute;
-            top: 20px;
+        /* Your existing CSS styles here... */
+        
+        /* Chatbox styles */
+        #chatbox {
+            position: fixed;
+            bottom: 10px;
             right: 10px;
-            display: flex;
-        }
-
-        .search-input {
-            padding: 10px;
+            background: white;
             border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 0.9em;
-            width: 200px;
-            margin-right: 5px;
-            background: white;
-            color: black;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
         }
 
-        .cart-button {
-            background: white;
-            color: black;
+        #messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            max-height: 200px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #messageInput {
             border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 10px;
+            flex: 0;
+            width: 100%;
+            border-radius: 0 0 10px 10px;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        #sendButton {
+            padding: 10px;
+            background: #ff4081;
+            color: white;
+            border: none;
             cursor: pointer;
-            font-size: 0.9em;
+            border-radius: 0 0 10px 10px;
             transition: background 0.3s;
         }
 
-        .cart-button:hover {
-            background: #ff4081;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ff4081;
-        }
-
-        #hero {
-            background: url('hero-image.jpg') no-repeat center center;
-            background-size: cover;
-            height: 400px;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        #hero h2 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-
-        #shop {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .product-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 0 -15px;
-        }
-
-        .product {
-            background: white;
-            margin: 15px;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-            width: 250px;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .product h3 {
-            margin: 10px 0;
-            font-size: 1.5em;
-        }
-
-        .product p {
-            font-size: 1.2em;
-            color: #ff4081;
-        }
-
-        footer {
-            background: #000;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .social-link {
-            color: white; 
-            text-decoration: none; 
-            margin: 0 10px; 
-        }
-
-        .social-link:hover {
-            color: #ff4081; 
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
+        #sendButton:hover {
+            background: #e73573;
         }
     </style>
 </head>
@@ -270,7 +98,6 @@
                 <p>$29.99</p>
                 <button class="add-to-cart">add to cart</button>
             </div>
-            
         </div>
     </section>
 
@@ -289,7 +116,32 @@
         </div>
     </div>
 
+    <!-- Chatbox -->
+    <div id="chatbox">
+        <div id="messages"></div>
+        <input type="text" id="messageInput" placeholder="Type a message..." />
+        <button id="sendButton">Send</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
     <script>
+        const socket = io(); // Make sure your server is set up to handle this
+
+        // Handle sending messages
+        document.getElementById('sendButton').onclick = function() {
+            const message = document.getElementById('messageInput').value;
+            socket.emit('chat message', message);
+            document.getElementById('messageInput').value = '';
+        };
+
+        // Display received messages
+        socket.on('chat message', function(msg) {
+            const item = document.createElement('div');
+            item.textContent = msg;
+            document.getElementById('messages').appendChild(item);
+        });
+
+        // Your existing JavaScript for the modal...
         document.addEventListener("DOMContentLoaded", () => {
             const cartButtons = document.querySelectorAll('.add-to-cart');
             const modal = document.getElementById('cart-modal');
@@ -302,20 +154,20 @@
                     const productName = product.getAttribute('data-name');
                     const productPrice = product.getAttribute('data-price');
 
-                    cartItem.textContent = ${productName} - $${productPrice} added to your cart!;
+                    cartItem.textContent = `${productName} - $${productPrice} added to your cart!`;
                     modal.style.display = "block";
                 });
             });
 
             closeModal.onclick = () => {
                 modal.style.display = "none";
-            }
+            };
 
             window.onclick = (event) => {
                 if (event.target === modal) {
                     modal.style.display = "none";
                 }
-            }
+            };
         });
     </script>
 </body>
