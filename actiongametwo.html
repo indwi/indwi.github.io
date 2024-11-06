@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            flex-direction: column;
+        }
+
+        #game-container {
+            position: relative;
+        }
+
+        #gameCanvas {
+            background-color: #87ceeb; /* Sky blue background */
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 24px;
+            color: black;
+        }
+
+        #reset-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="score">Score: 0</div>
+    </div>
+    <button id="reset-btn">Reset Game</button>
+
+    <script>
+        // Get canvas and context
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size
+        canvas.width = 800;
+        canvas.height = 600;
+
+        // Game variables
+        let playerX = canvas.width / 2;
+        let playerY = canvas.height - 50;
+        let playerWidth = 50;
+        let playerHeight = 50;
+        let playerSpeed = 5;
+        let score = 0;
+
+        // Enemy variables
+        let enemies = [];
+        let enemySpeed = 2;
+        let enemyFrequency = 100;
+
+        let leftArrowPressed = false;
+        let rightArrowPressed = false;
+
+        // Event listeners for keydown and keyup
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') leftArrowPressed = true;
+            if (e.key === 'ArrowRight') rightArrowPressed = true;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key === 'ArrowLeft') leftArrowPressed = false;
+            if (e.key === 'ArrowRight') rightArrowPressed = false;
+        });
+
+        // Function to reset the game state
+        function resetGame() {
+            playerX = canvas.width / 2;
+            playerY = canvas.height - 50;
+            score = 0;
+            enemies = [];
+            gameLoop(); // Start the game loop again
+        }
+
+        // Function to update player position
+        function updatePlayer() {
+            if (leftArrowPressed && playerX > 0) {
+                playerX -= playerSpeed;
+            }
+            if (rightArrowPressed && playerX < canvas.width - playerWidth) {
+                playerX += playerSpeed;
+            }
+        }
+
+        // Function to generate new enemies
+        function createEnemy() {
+            const enemyX = Math.random() * (canvas.width - 50);
+            enemies.push({ x: enemyX, y: -50, width: 50, height: 50 });
+        }
+
+        // Function to update enemies
+        function updateEnemies() {
+            for (let i = 0; i < enemies.length; i++) {
+                enemies[i].y += enemySpeed;
+                if (enemies[i].y > canvas.height) {
+                    enemies.splice(i, 1); // Remove enemy when it goes off screen
+                    score++; // Increase score
+                }
+            }
+        }
+
+        // Function to check for collisions
+        function checkCollisions() {
+            for (let i = 0; i < enemies.length; i++) {
+                const e = enemies[i];
+                if (
+                    playerX < e.x + e.width &&
+                    playerX + playerWidth > e.x &&
+                    playerY < e.y + e.height &&
+                    playerY + playerHeight > e.y
+                ) {
+                    alert('Game Over! Final Score: ' + score);
+                    resetGame(); // Reset game after collision
+                }
+            }
+        }
+
+        // Function to draw everything on the canvas
+        function draw() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw the player
+            ctx.fillStyle = '#00f'; // Blue
+            ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
+
+            // Draw enemies
+            ctx.fillStyle = '#f00'; // Red
+            for (let i = 0; i < enemies.length; i++) {
+                const e = enemies[i];
+                ctx.fillRect(e.x, e.y, e.width, e.height);
+            }
+
+            // Draw the score
+            ctx.fillStyle = '#000';
+            ctx.font = '24px Arial';
+            ctx.fillText('Score: ' + score, 10, 30);
+        }
+
+        // Main game loop
+        function gameLoop() {
+            updatePlayer(); // Update player position
+            updateEnemies(); // Update enemies position
+            checkCollisions(); // Check for collisions
+            draw(); // Draw game elements on canvas
+            requestAnimationFrame(gameLoop); // Keep calling the game loop to animate
+        }
+
+        // Start the game loop initially
+        gameLoop();
+
+        // Create enemies at regular intervals
+        setInterval(createEnemy, enemyFrequency);
+
+        // Reset button click event listener
+        document.getElementById('reset-btn').addEventListener('click', resetGame);
+    </script>
+</body>
+</html>
