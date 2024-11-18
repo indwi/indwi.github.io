@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>your cart | urban streetwear store</title>
+    <title>Your Cart</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Sedgwick+Ave+Display&display=swap" rel="stylesheet">
@@ -18,8 +18,9 @@
 
         body {
             font-family: 'Oswald', sans-serif;
-            background-color: #f0f0f0;
-            color: #333;
+            background-color: #000;
+            color: #fff;
+            text-transform: lowercase;
         }
 
         header {
@@ -28,111 +29,68 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            position: relative;
         }
 
         h1 {
             margin: 0;
-        }
-
-        .search-bar {
-            position: absolute;
-            top: 20px;
-            right: 10px;
-            display: flex;
-        }
-
-        .search-input {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 0.9em;
-            width: 200px;
-            margin-right: 5px;
-            background: white;
-            color: black;
-        }
-
-        .cart-button {
-            background: white;
-            color: black;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background 0.3s;
-        }
-
-        .cart-button:hover {
-            background: #ff4081;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #ff4081;
+            font-size: 2.5em;
+            font-family: 'Sedgwick Ave Display', cursive;
         }
 
         .cart-container {
-            padding: 40px 20px;
+            padding: 20px;
             text-align: center;
         }
 
         .cart-item {
+            background: #333;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: white;
-            margin: 15px 0;
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
         .cart-item img {
             width: 50px;
-            border-radius: 10px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 20px;
         }
 
         .cart-item h3 {
-            font-size: 1.2em;
             margin: 0;
+            font-size: 1.2em;
         }
 
         .cart-item p {
-            font-size: 1.1em;
+            font-size: 1em;
+            color: #ff4081;
+        }
+
+        .total {
+            font-size: 1.5em;
+            margin-top: 20px;
             color: #ff4081;
         }
 
         .checkout-button {
+            padding: 10px 20px;
             background: #ff4081;
             color: white;
             border: none;
-            padding: 15px 30px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1em;
-            transition: background 0.3s;
+            font-size: 1.2em;
+            margin-top: 20px;
         }
 
         .checkout-button:hover {
-            background: #e0306b;
+            background: #e60073;
         }
 
         footer {
@@ -140,6 +98,9 @@
             color: white;
             text-align: center;
             padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
             margin-top: 40px;
         }
 
@@ -157,25 +118,18 @@
 <body>
 
     <header>
-        <h1>urban streetwear</h1>
-        <div class="search-bar">
-            <input type="text" class="search-input" placeholder="search..." />
-            <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="home.html">home</a></li> 
-                <li><a href="shop.html">shop</a></li>
-            </ul>
-        </nav>
+        <h1>your cart</h1>
     </header>
 
     <div class="cart-container">
-        <h2>your cart</h2>
-        <div id="cart-items">
-            <!-- Cart items will be inserted here dynamically -->
+        <div id="cart-items-list">
+            <!-- Cart items will be dynamically inserted here -->
         </div>
-        <p id="total-price" style="font-size: 1.5em; margin: 20px 0;"></p>
+
+        <div class="total" id="cart-total">
+            <!-- Total price will be displayed here -->
+        </div>
+
         <button class="checkout-button" id="checkout-button">checkout</button>
     </div>
 
@@ -186,38 +140,62 @@
     </footer>
 
     <script>
-        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const cartItemsContainer = document.getElementById('cart-items');
-        const totalPriceElement = document.getElementById('total-price');
+        document.addEventListener("DOMContentLoaded", () => {
+            const cartItemsList = document.getElementById('cart-items-list');
+            const cartTotal = document.getElementById('cart-total');
+            const checkoutButton = document.getElementById('checkout-button');
 
-        // Function to update the cart display
-        function updateCart() {
-            cartItemsContainer.innerHTML = '';
-            let totalPrice = 0;
+            // Retrieve cart data from localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            cartItems.forEach(item => {
-                totalPrice += item.price;
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'cart-item';
-                itemDiv.innerHTML = `
-                    <img src="https://via.placeholder.com/50" alt="${item.name}">
-                    <h3>${item.name}</h3>
-                    <p>$${item.price.toFixed(2)}</p>
-                `;
-                cartItemsContainer.appendChild(itemDiv);
+            // Function to update the cart total
+            const updateTotal = () => {
+                const totalPrice = cart.reduce((total, item) => total + parseFloat(item.price), 0);
+                cartTotal.textContent = `Total: $${totalPrice.toFixed(2)}`;
+            };
+
+            // Function to create cart item HTML
+            const renderCartItems = () => {
+                if (cart.length === 0) {
+                    cartItemsList.innerHTML = `<p>Your cart is empty!</p>`;
+                } else {
+                    cartItemsList.innerHTML = ''; // Clear cart list before re-rendering
+                    cart.forEach(item => {
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('cart-item');
+
+                        // Item info (could be an image if you want to link to images for each product)
+                        itemDiv.innerHTML = `
+                            <img src="https://via.placeholder.com/50" alt="${item.name}">
+                            <div>
+                                <h3>${item.name}</h3>
+                                <p>$${item.price}</p>
+                            </div>
+                        `;
+                        cartItemsList.appendChild(itemDiv);
+                    });
+                }
+
+                // Update total price
+                updateTotal();
+            };
+
+            // Render cart items on page load
+            renderCartItems();
+
+            // Checkout functionality
+            checkoutButton.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Your cart is empty. Add items to proceed with checkout!');
+                } else {
+                    // Simulate checkout process, for now just clear the cart
+                    localStorage.removeItem('cart');
+                    cart = [];
+                    alert('Checkout complete! Thank you for your purchase.');
+                    renderCartItems();  // Re-render cart after checkout
+                }
             });
-
-            totalPriceElement.textContent = `total: $${totalPrice.toFixed(2)}`;
-        }
-
-        // Event listener for checkout button
-        document.getElementById('checkout-button').addEventListener('click', () => {
-            localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            window.location.href = 'checkout.html';
         });
-
-        // Initial call to populate the cart
-        updateCart();
     </script>
 
 </body>
