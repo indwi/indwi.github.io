@@ -134,7 +134,7 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#shop">shop</a></li>
+                <li><a href="shop.html">shop</a></li>
             </ul>
         </nav>
     </header>
@@ -148,22 +148,6 @@
         <button class="checkout-button" id="checkout-button">checkout</button>
     </div>
 
-    <div class="product-container">
-        <h2>available products</h2>
-        <div class="product" data-name="cool hoodie" data-price="49.99">
-            <img src="https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749" alt="cool hoodie" width="100">
-            <h3>cool hoodie</h3>
-            <p>$49.99</p>
-            <button class="add-to-cart">add to cart</button>
-        </div>
-        <div class="product" data-name="graphic t-shirt" data-price="29.99">
-            <img src="https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080" alt="graphic t-shirt" width="100">
-            <h3>graphic t-shirt</h3>
-            <p>$29.99</p>
-            <button class="add-to-cart">add to cart</button>
-        </div>
-    </div>
-
     <footer>
         <p>follow us on social media!</p>
         <a href="#" class="social-link">instagram</a>
@@ -171,21 +155,11 @@
     </footer>
 
     <script>
-        const cartItems = [];
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const cartItemsContainer = document.getElementById('cart-items');
         const totalPriceElement = document.getElementById('total-price');
 
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const productElement = button.parentElement;
-                const productName = productElement.getAttribute('data-name');
-                const productPrice = parseFloat(productElement.getAttribute('data-price'));
-
-                cartItems.push({ name: productName, price: productPrice });
-                updateCart();
-            });
-        });
-
+        // Function to update the cart display
         function updateCart() {
             cartItemsContainer.innerHTML = '';
             let totalPrice = 0;
@@ -195,7 +169,7 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = 'cart-item';
                 itemDiv.innerHTML = `
-                    <img src="https://example.com/image.jpg" alt="${item.name}">
+                    <img src="https://via.placeholder.com/50" alt="${item.name}">
                     <h3>${item.name}</h3>
                     <p>$${item.price.toFixed(2)}</p>
                 `;
@@ -205,12 +179,16 @@
             totalPriceElement.textContent = `total: $${totalPrice.toFixed(2)}`;
         }
 
+        // Event listener for checkout button
         document.getElementById('checkout-button').addEventListener('click', () => {
             localStorage.setItem('cartItems', JSON.stringify(cartItems));
             window.location.href = 'checkout.html';
         });
 
-        // Search functionality
+        // Initial call to populate the cart
+        updateCart();
+
+        // Search functionality for products
         document.getElementById('search-input').addEventListener('input', function() {
             const searchTerm = this.value.toLowerCase();
             const products = document.querySelectorAll('.product');
