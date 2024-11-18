@@ -35,6 +35,60 @@
             margin: 0;
         }
 
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            display: flex;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            width: 200px;
+            margin-right: 5px;
+            background: white;
+            color: black;
+        }
+
+        .cart-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #ff4081;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
         .cart-container {
             padding: 40px 20px;
             text-align: center;
@@ -98,42 +152,19 @@
         .social-link:hover {
             color: #ff4081; 
         }
-
-        .product {
-            margin: 15px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .add-to-cart {
-            background: #ff4081;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        .add-to-cart:hover {
-            background: #e0306b;
-        }
     </style>
 </head>
 <body>
+
     <header>
         <h1>urban streetwear</h1>
         <div class="search-bar">
-            <input type="text" class="search-input" placeholder="search..." id="search-input" />
+            <input type="text" class="search-input" placeholder="search..." />
             <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
         </div>
         <nav>
             <ul>
+                <li><a href="home.html">home</a></li> 
                 <li><a href="shop.html">shop</a></li>
             </ul>
         </nav>
@@ -187,21 +218,7 @@
 
         // Initial call to populate the cart
         updateCart();
-
-        // Search functionality for products
-        document.getElementById('search-input').addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const products = document.querySelectorAll('.product');
-
-            products.forEach(product => {
-                const productName = product.querySelector('h3').textContent.toLowerCase();
-                if (productName.includes(searchTerm)) {
-                    product.style.display = 'block'; // Show matching product
-                } else {
-                    product.style.display = 'none'; // Hide non-matching product
-                }
-            });
-        });
     </script>
+
 </body>
 </html>
