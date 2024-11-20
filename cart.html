@@ -133,8 +133,8 @@
         }
 
         .cart-item img {
-            width: 50px;
-            height: 50px;
+            width: 80px;  /* Adjusted to make the images bigger */
+            height: 80px;
             object-fit: cover;
             border-radius: 5px;
             margin-right: 20px;
@@ -227,8 +227,34 @@
             const cartTotal = document.getElementById('cart-total');
             const checkoutButton = document.getElementById('checkout-button');
 
-            // Retrieve cart data from localStorage
-            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            // Example cart data with 5 items
+            let cart = [
+                {
+                    name: 'cool hoodie',
+                    price: '49.99',
+                    image: 'https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749'
+                },
+                {
+                    name: 'graphic t-shirt',
+                    price: '29.99',
+                    image: 'https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080'
+                },
+                {
+                    name: 'pretty fire sneakers',
+                    price: '79.99',
+                    image: 'https://via.placeholder.com/80?text=Product+3'
+                },
+                {
+                    name: 'ski mask',
+                    price: '19.99',
+                    image: 'https://via.placeholder.com/80?text=Product+4'
+                },
+                {
+                    name: 'Product 5',
+                    price: '59.99',
+                    image: 'https://via.placeholder.com/80?text=Product+5'
+                }
+            ];
 
             // Function to update the cart total
             const updateTotal = () => {
@@ -246,9 +272,9 @@
                         const itemDiv = document.createElement('div');
                         itemDiv.classList.add('cart-item');
 
-                        // Item info (could be an image if you want to link to images for each product)
+                        // Item info (including image, name, and price)
                         itemDiv.innerHTML = `
-                            <img src="https://via.placeholder.com/50" alt="${item.name}">
+                            <img src="${item.image}" alt="${item.name}">
                             <div>
                                 <h3>${item.name}</h3>
                                 <p>$${item.price}</p>
@@ -278,18 +304,9 @@
 
             // Checkout functionality
             checkoutButton.addEventListener('click', () => {
-                if (cart.length === 0) {
-                    alert('Your cart is empty. Add items to proceed with checkout!');
-                } else {
-                    // Simulate checkout process, for now just clear the cart
-                    localStorage.removeItem('cart');
-                    cart = [];
-                    alert('Checkout complete! Thank you for your purchase.');
-                    renderCartItems();  // Re-render cart after checkout
-                }
+                alert('Proceeding to checkout!');
             });
         });
     </script>
-
 </body>
 </html>
