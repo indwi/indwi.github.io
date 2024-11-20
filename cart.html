@@ -227,34 +227,8 @@
             const cartTotal = document.getElementById('cart-total');
             const checkoutButton = document.getElementById('checkout-button');
 
-            // Example cart data with 5 items
-            let cart = [
-                {
-                    name: 'cool hoodie',
-                    price: '49.99',
-                    image: 'https://theborzstore.com/cdn/shop/files/02_0c2f98ce-6d92-447d-9df2-bf6a2a9404ef.jpg?v=1718214749'
-                },
-                {
-                    name: 'graphic t-shirt',
-                    price: '29.99',
-                    image: 'https://urbanuniq.com/cdn/shop/files/Untitledimage_7d7cf595-b621-474c-89a5-41a72f028b06.jpg?crop=center&height=1080&v=1725896462&width=1080'
-                },
-                {
-                    name: 'pretty fire sneakers',
-                    price: '79.99',
-                    image: 'https://via.placeholder.com/80?text=Product+3'
-                },
-                {
-                    name: 'ski mask',
-                    price: '19.99',
-                    image: 'https://via.placeholder.com/80?text=Product+4'
-                },
-                {
-                    name: 'Product 5',
-                    price: '59.99',
-                    image: 'https://via.placeholder.com/80?text=Product+5'
-                }
-            ];
+            // Retrieve cart data from localStorage (if available)
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
             // Function to update the cart total
             const updateTotal = () => {
