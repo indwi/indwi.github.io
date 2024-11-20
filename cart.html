@@ -21,6 +21,8 @@
             background-color: #000;
             color: #fff;
             text-transform: lowercase;
+            position: relative;
+            overflow: hidden;
         }
 
         header {
@@ -29,12 +31,88 @@
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
 
         h1 {
             margin: 0;
             font-size: 2.5em;
             font-family: 'Sedgwick Ave Display', cursive;
+        }
+
+        .search-bar {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            display: flex;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9em;
+            width: 200px;
+            margin-right: 5px;
+            background: white;
+            color: black;
+        }
+
+        .cart-button {
+            background: white;
+            color: black;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+
+        .cart-button:hover {
+            background: #ff4081;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #ff4081;
+        }
+
+        footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .social-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .social-link:hover {
+            color: #ff4081;
         }
 
         .cart-container {
@@ -72,6 +150,21 @@
             color: #ff4081;
         }
 
+        .remove-item {
+            padding: 5px 10px;
+            background: #ff4081;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 15px;
+        }
+
+        .remove-item:hover {
+            background: #e60073;
+        }
+
         .total {
             font-size: 1.5em;
             margin-top: 20px;
@@ -92,33 +185,22 @@
         .checkout-button:hover {
             background: #e60073;
         }
-
-        footer {
-            background: #000;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            position: relative;
-            bottom: 0;
-            width: 100%;
-            margin-top: 40px;
-        }
-
-        .social-link {
-            color: white; 
-            text-decoration: none; 
-            margin: 0 10px; 
-        }
-
-        .social-link:hover {
-            color: #ff4081; 
-        }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>your cart</h1>
+        <h1>urban streetwear</h1>
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="search..." />
+            <button class="cart-button" onclick="window.location.href='cart.html'">cart</button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="home.html">home</a></li>
+                <li><a href="shop.html">shop</a></li>
+            </ul>
+        </nav>
     </header>
 
     <div class="cart-container">
@@ -160,7 +242,7 @@
                     cartItemsList.innerHTML = `<p>Your cart is empty!</p>`;
                 } else {
                     cartItemsList.innerHTML = ''; // Clear cart list before re-rendering
-                    cart.forEach(item => {
+                    cart.forEach((item, index) => {
                         const itemDiv = document.createElement('div');
                         itemDiv.classList.add('cart-item');
 
@@ -171,6 +253,7 @@
                                 <h3>${item.name}</h3>
                                 <p>$${item.price}</p>
                             </div>
+                            <button class="remove-item" data-index="${index}">Remove</button>
                         `;
                         cartItemsList.appendChild(itemDiv);
                     });
@@ -179,6 +262,16 @@
                 // Update total price
                 updateTotal();
             };
+
+            // Remove item functionality
+            cartItemsList.addEventListener('click', (event) => {
+                if (event.target.classList.contains('remove-item')) {
+                    const itemIndex = event.target.getAttribute('data-index');
+                    cart.splice(itemIndex, 1);  // Remove item from cart
+                    localStorage.setItem('cart', JSON.stringify(cart));  // Update localStorage
+                    renderCartItems();  // Re-render cart after removal
+                }
+            });
 
             // Render cart items on page load
             renderCartItems();
